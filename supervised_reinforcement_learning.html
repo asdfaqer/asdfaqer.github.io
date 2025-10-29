@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.8.2/core.css"/>
+    <script defer src="https://pyscript.net/releases/2024.8.2/core.js"></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #bb1dff;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+.row a {
+    float: left;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.row a.sublink {
+    padding-left: 40px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* Change color on hover */
+.row a:hover {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.image {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+    
+<div class="header">
+  <h1>Will LLMs reach Human-Level Intelligence?</h1>
+  <p>The how and why LLMs reason. And what are the challenges they will face.</p>
+</div>
+
+<div class="navbar">
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>Contents</h2>
+    <div class="sublinks">
+        <a href="introduction.html" class="sublink" style="display:block; float:none;">Introduction</a>
+        <a href="neural_networks.html" class="sublink" style="display:block; float:none;">Neural Networks</a>
+        <a href="supervised_reinforcement_learning.html" class="sublink" style="display:block; float:none;">Supervised and Reinforcement Learning</a>
+        <a href="llms_reasoning.html" class="sublink" style="display:block; float:none;">LLMs and Reasoning</a>
+        <a href="challenges_ahead.html" class="sublink" style="display:block; float:none;">Challenges Ahead</a>
+    </div>
+  </div>
+  <div class="main">
+    <h2>Supervised and Reinforcement Learning</h2>
+    <p>
+        There are two main catorgorys of ML, supervised where the model is train on many inputs with a the correct outputs already provided.
+        These models tend to be used in image classification, translation, and language modeling tasks.
+         Or reinforcement learning where the model is trained on a reward and improves it self using that as a guide.
+          While reinforcement learning can be more constly it isn't limited by quaility of data humans can provide it. 
+          Thus allowing it to outpreform humans and other traditional algroithm in various board games like chess and go.
+          As well as some play some videos games with pro level gameplay like starcraft and dota 2.
+          Even tasks like protein folding fall use reinforcement learning algroithms.
+    </p>
+    <br>
+    <p>
+        Demo of a supervised learning algorithm learning to classify dots (not finished all the ML classifier will crash)
+    </p>
+    
+    <button type="button">Distribution 1</button>
+    <button type="button">Distribution 2</button>
+    <button type="button">Distribution 3</button>
+
+    <button onclick="classify()">Classify</button>
+    
+    <select id="mySelect">
+        <option value="line of best fit">line of best fit</option>
+        <option value="relu classification">relu classification</option>
+        <option value="tanh classification">tanh classification</option>
+    </select>
+    
+    <div id="my-div">
+        <canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;">
+            Your browser does not support the HTML5 canvas element.
+        </canvas>
+
+        <canvas id="myCanvas2" width="200" height="200" style="border:1px solid #000000;">
+            Your browser does not support the HTML5 canvas element.
+        </canvas>
+
+        <script>
+            const CANVAS_WIDTH = 500;
+            const CANVAS_HEIGHT = 500;
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            
+            function draw_point(x, y, color) {
+                ctx.fillStyle = color;
+                ctx.fillRect(x, y, 3, 3);
+            }
+            
+            function draw_line(x1, y1, x2, y2, color) {  
+                ctx.strokeStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+            
+            function draw_points_list(points_list) {
+                for (let i = 0; i < points_list.length; i++) {
+                    draw_point(points_list[i][0], points_list[i][1], points_list[i][2]);
+                }
+            }
+
+            // --- NEW: Function to draw the light-colored background ---
+            function drawBackground(slope, y_int) {
+                const lightRed = 'rgb(255, 220, 220)';
+                const lightGreen = 'rgb(220, 255, 220)';
+                const step = 5; // Draw a 5x5 pixel square for performance
+
+                for (let x = 0; x < CANVAS_WIDTH; x += step) {
+                    for (let y = 0; y < CANVAS_HEIGHT; y += step) {
+                        const prediction_is_red = (y < slope * x + y_int);
+                        ctx.fillStyle = prediction_is_red ? lightRed : lightGreen;
+                        ctx.fillRect(x, y, step, step);
+                    }
+                }
+            }
+
+            function interpolateColor(color1, color2, factor) {
+                var result = color1.slice(4, -1).split(',').map(Number);
+                var c2 = color2.slice(4, -1).split(',').map(Number);
+                for (var i = 0; i < 3; i++) {
+                    result[i] = Math.round(result[i] + factor * (c2[i] - result[i]));
+                }
+                return 'rgb(' + result.join(',') + ')';
+            }
+
+            function dot_product(a, b) {
+                let result = 0;
+                for (let i = 0; i < a.length; i++) {
+                    result += a[i] * b[i];
+                }
+                return result;
+            }
+            
+            const points = [[61, 436, 'rgb(0, 150, 0)'], [130, 337, 'rgb(0, 150, 0)'], [66, 329, 'rgb(0, 150, 0)'], [83, 475, 'rgb(0, 150, 0)'], [290, 495, 'rgb(0, 150, 0)'], [134, 294, 'rgb(0, 150, 0)'], [285, 432, 'rgb(0, 150, 0)'], [194, 137, 'rgb(150, 0, 0)'], [185, 257, 'rgb(0, 150, 0)'], [412, 349, 'rgb(150, 0, 0)'], [50, 479, 'rgb(0, 150, 0)'], [77, 373, 'rgb(0, 150, 0)'], [283, 98, 'rgb(150, 0, 0)'], [426, 42, 'rgb(150, 0, 0)'], [443, 225, 'rgb(150, 0, 0)'], [345, 29, 'rgb(150, 0, 0)'], [421, 374, 'rgb(150, 0, 0)'], [199, 81, 'rgb(150, 0, 0)'], [52, 494, 'rgb(0, 150, 0)'], [214, 248, 'rgb(0, 150, 0)'], [72, 389, 'rgb(0, 150, 0)'], [487, 59, 'rgb(150, 0, 0)'], [274, 473, 'rgb(0, 150, 0)'], [103, 91, 'rgb(150, 0, 0)'], [139, 240, 'rgb(0, 150, 0)'], [444, 131, 'rgb(150, 0, 0)'], [240, 389, 'rgb(0, 150, 0)'], [81, 293, 'rgb(0, 150, 0)'], [78, 189, 'rgb(0, 150, 0)'], [22, 182, 'rgb(0, 150, 0)'], [292, 119, 'rgb(150, 0, 0)'], [289, 161, 'rgb(150, 0, 0)'], [352, 260, 'rgb(150, 0, 0)'], [215, 62, 'rgb(150, 0, 0)'], [50, 125, 'rgb(0, 150, 0)'], [493, 473, 'rgb(150, 0, 0)'], [142, 155, 'rgb(0, 150, 0)'], [27, 310, 'rgb(0, 150, 0)'], [265, 251, 'rgb(150, 0, 0)'], [52, 166, 'rgb(0, 150, 0)'], [408, 73, 'rgb(150, 0, 0)'], [130, 71, 'rgb(150, 0, 0)'], [270, 21, 'rgb(150, 0, 0)'], [53, 191, 'rgb(0, 150, 0)'], [177, 185, 'rgb(0, 150, 0)'], [383, 164, 'rgb(150, 0, 0)'], [188, 349, 'rgb(0, 150, 0)'], [226, 62, 'rgb(150, 0, 0)'], [397, 226, 'rgb(150, 0, 0)'], [300, 451, 'rgb(0, 150, 0)'], [308, 221, 'rgb(150, 0, 0)'], [296, 157, 'rgb(150, 0, 0)'], [345, 251, 'rgb(150, 0, 0)'], [207, 429, 'rgb(0, 150, 0)'], [423, 42, 'rgb(150, 0, 0)'], [370, 402, 'rgb(0, 150, 0)'], [201, 461, 'rgb(0, 150, 0)'], [160, 437, 'rgb(0, 150, 0)'], [259, 17, 'rgb(150, 0, 0)'], [218, 125, 'rgb(150, 0, 0)'], [9, 179, 'rgb(0, 150, 0)'], [372, 375, 'rgb(0, 150, 0)'], [322, 297, 'rgb(150, 0, 0)'], [497, 221, 'rgb(150, 0, 0)'], [309, 228, 'rgb(150, 0, 0)'], [337, 210, 'rgb(150, 0, 0)'], [500, 214, 'rgb(150, 0, 0)'], [419, 39, 'rgb(150, 0, 0)'], [367, 71, 'rgb(150, 0, 0)'], [350, 368, 'rgb(0, 150, 0)'], [355, 464, 'rgb(0, 150, 0)'], [336, 80, 'rgb(150, 0, 0)'], [490, 63, 'rgb(150, 0, 0)'], [451, 264, 'rgb(150, 0, 0)'], [470, 52, 'rgb(150, 0, 0)'], [299, 319, 'rgb(0, 150, 0)'], [294, 427, 'rgb(0, 150, 0)'], [43, 403, 'rgb(0, 150, 0)'], [329, 236, 'rgb(150, 0, 0)'], [453, 213, 'rgb(150, 0, 0)'], [422, 150, 'rgb(150, 0, 0)'], [438, 20, 'rgb(150, 0, 0)'], [238, 447, 'rgb(0, 150, 0)'], [290, 111, 'rgb(150, 0, 0)'], [376, 297, 'rgb(150, 0, 0)'], [247, 396, 'rgb(0, 150, 0)'], [234, 492, 'rgb(0, 150, 0)'], [132, 305, 'rgb(0, 150, 0)'], [423, 106, 'rgb(150, 0, 0)'], [102, 282, 'rgb(0, 150, 0)'], [360, 434, 'rgb(0, 150, 0)'], [53, 191, 'rgb(0, 150, 0)'], [58, 420, 'rgb(0, 150, 0)'], [443, 402, 'rgb(150, 0, 0)'], [164, 454, 'rgb(0, 150, 0)'], [81, 454, 'rgb(0, 150, 0)'], [366, 110, 'rgb(150, 0, 0)'], [265, 438, 'rgb(0, 150, 0)'], [172, 498, 'rgb(0, 150, 0)'], [251, 65, 'rgb(150, 0, 0)'], [431, 315, 'rgb(150, 0, 0)'], [109, 142, 'rgb(0, 150, 0)'], [240, 382, 'rgb(0, 150, 0)'], [496, 24, 'rgb(150, 0, 0)'], [209, 138, 'rgb(150, 0, 0)'], [160, 130, 'rgb(150, 0, 0)'], [328, 102, 'rgb(150, 0, 0)'], [223, 431, 'rgb(0, 150, 0)'], [287, 36, 'rgb(150, 0, 0)'], [166, 421, 'rgb(0, 150, 0)'], [164, 395, 'rgb(0, 150, 0)'], [150, 226, 'rgb(0, 150, 0)'], [152, 435, 'rgb(0, 150, 0)'], [347, 487, 'rgb(0, 150, 0)'], [262, 37, 'rgb(150, 0, 0)'], [464, 26, 'rgb(150, 0, 0)'], [460, 256, 'rgb(150, 0, 0)'], [349, 124, 'rgb(150, 0, 0)'], [135, 319, 'rgb(0, 150, 0)'], [97, 268, 'rgb(0, 150, 0)'], [374, 301, 'rgb(150, 0, 0)'], [195, 285, 'rgb(0, 150, 0)'], [373, 186, 'rgb(150, 0, 0)'], [106, 366, 'rgb(0, 150, 0)'], [301, 251, 'rgb(150, 0, 0)'], [236, 177, 'rgb(150, 0, 0)'], [64, 91, 'rgb(0, 150, 0)'], [217, 80, 'rgb(150, 0, 0)'], [4, 311, 'rgb(0, 150, 0)'], [22, 354, 'rgb(0, 150, 0)'], [470, 275, 'rgb(150, 0, 0)'], [392, 310, 'rgb(150, 0, 0)'], [64, 10, 'rgb(150, 0, 0)'], [487, 92, 'rgb(150, 0, 0)'], [285, 308, 'rgb(0, 150, 0)'], [436, 425, 'rgb(150, 0, 0)'], [132, 97, 'rgb(150, 0, 0)'], [128, 451, 'rgb(0, 150, 0)'], [110, 373, 'rgb(0, 150, 0)'], [49, 66, 'rgb(0, 150, 0)'], [332, 32, 'rgb(150, 0, 0)'], [43, 65, 'rgb(0, 150, 0)'], [353, 75, 'rgb(150, 0, 0)'], [333, 140, 'rgb(150, 0, 0)'], [348, 375, 'rgb(0, 150, 0)'], [151, 70, 'rgb(150, 0, 0)'], [116, 399, 'rgb(0, 150, 0)'], [66, 30, 'rgb(150, 0, 0)'], [66, 421, 'rgb(0, 150, 0)'], [280, 104, 'rgb(150, 0, 0)']];
+            // Draw the initial points
+            for (let inx = 0; inx < points.length; inx++) {
+                draw_point(points[inx][0], points[inx][1], points[inx][2]);
+            }
+
+            function sigmoid(x) {
+                return 1 / (1 + Math.exp(-x));
+            }
+
+            function relu(x) {
+                return Math.max(0, x);
+            }
+
+            function sigmoid_derivative(x) {
+                const s = sigmoid(x);
+                return s * (1 - s);
+            }
+
+            function hadamard_product(a, b) {
+                let result = [];
+                for (let i = 0; i < a.length; i++) {
+                    result.push(a[i] * b[i]);
+                }
+                return result;
+            }
+        </script> 
+        <script>
+            // Initialize the second canvas
+            var c2 = document.getElementById("myCanvas2");
+            var ctx2 = c2.getContext("2d");
+            // You can add drawing functions for the second canvas here if needed
+            function draw_circle_on_canvas2(x, y, radius, color) {
+                ctx2.fillStyle = color;
+                ctx2.beginPath();
+                ctx2.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx2.fill();
+            }
+
+            function draw_line_on_canvas2(x1, y1, x2, y2, color) {  
+                ctx2.strokeStyle = color;
+                ctx2.beginPath();
+                ctx2.moveTo(x1, y1);
+                ctx2.lineTo(x2, y2);
+                ctx2.stroke();
+            }
+            function shift_to_center_layer(num_neurons) {
+                return (150 - ( ( (num_neurons-1) * 50 ) / 2 ));
+            }
+            function draw_neural_network(weights, biases) {
+                // Placeholder for drawing the neural network structure
+                // You can implement a visualization of the neural network here
+                //using circles for neurons and lines for connections
+                // Draw the input layer
+                let input_layer_size = 2;
+                for (let i = 0; i < input_layer_size; i++) {
+                    let neuron_x = 25;
+                    let neuron_y = i * 50 + shift_to_center_layer(input_layer_size);
+                    draw_circle_on_canvas2(neuron_x, neuron_y, 15, 'orange');
+                }
+
+                // Draw hidden layers
+                for (let layer = 0; layer < weights.length - 1; layer++)
+                {
+                    let hidden_layer = weights[layer];
+                    for (let j = 0; j < hidden_layer.length; j++) {
+                        let neuron_x = 25 + (layer + 1) * 100;
+                        let neuron_y = j * 50 + shift_to_center_layer(hidden_layer.length);
+                        draw_circle_on_canvas2(neuron_x, neuron_y, 15, 'lightblue');
+                        // Display bias value rounded to two decimal places on neuron
+                        ctx2.fillStyle = 'black';
+                        ctx2.font = '12px Arial';
+                        ctx2.fillText(biases[layer][j].toFixed(2), neuron_x - 10, neuron_y - 20);
+                        // Draw connections from previous layer
+                        let prev_layer = weights[layer][j];
+                        for (let k = 0; k < prev_layer.length; k++) {
+                            let prev_neuron_x = 25 + layer * 100;
+                            let prev_neuron_y = k * 50 + shift_to_center_layer(prev_layer.length);
+                            // Draw line from prev neuron to current neuron with boldness based on weight magnitude and color on sign
+                            let weight_magnitude = Math.abs(weights[layer][j][k]);
+                            let line_width = Math.max(1, weight_magnitude * 5);
+                            ctx2.lineWidth = line_width;
+                            let line_color = weights[layer][j][k] > 0 ? 'green' : 'red';
+                            draw_line_on_canvas2(prev_neuron_x, prev_neuron_y, neuron_x, neuron_y, line_color);
+                        }
+                    }
+                }
+
+                // Draw the output layer
+                let output_layer_size = weights[weights.length - 1][0].length;
+                for (let i = 0; i < output_layer_size; i++) {
+                    let neuron_x = 25 + (weights.length) * 100;
+                    let neuron_y = i * 50 + shift_to_center_layer(output_layer_size);
+                    draw_circle_on_canvas2(neuron_x, neuron_y, 15, 'lightgreen');
+                    // Display bias rounded to two decimal places on neuron
+                    ctx2.fillStyle = 'black';
+                    ctx2.font = '12px Arial';
+                    ctx2.fillText(biases[biases.length - 1][i].toFixed(2), neuron_x - 10, neuron_y - 20);
+                    // Draw connections from last hidden layer
+                    let last_hidden_layer = weights[weights.length - 2];
+                    for (let j = 0; j < last_hidden_layer.length; j++) {
+                        let prev_neuron_x = 25 + (weights.length - 1) * 100;
+                        let prev_neuron_y = j * 50 + shift_to_center_layer(last_hidden_layer.length);
+                        // Draw line from prev neuron to current neuron with boldness based on weight magnitude and color on sign
+                        let weight_magnitude = Math.abs(weights[weights.length - 2][j][i]);
+                        let line_width = Math.max(1, weight_magnitude * 5);
+                        ctx2.lineWidth = line_width;
+                        let line_color = weights[weights.length - 2][j][i] > 0 ? 'green' : 'red';
+                        draw_line_on_canvas2(prev_neuron_x, prev_neuron_y, neuron_x, neuron_y, line_color);
+                    }
+                }
+            }
+        </script>
+    </div>
+
+    <p>Demo of Reinforcement Learning</p>
+    <div>Not Finished</div>
+
+    <script>
+        // --- State variables for our animation loop ---
+        let best_slope, best_y_int, best_score, currentIteration;
+        let inputs, outputs, Hidden_Layers, Neurons_Per_Layer;
+        let weights, biases;
+        let learning_rate;
+        let animationFrameId = null; // To keep track of the animation request
+        const maxIterations = 1000;
+        const red_label = 'rgb(150, 0, 0)';
+
+        // This function will be called to start or restart the process
+        function startFindingBestFit() {
+
+            // If an animation is already running, cancel it before starting a new one
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            // --- Reset the state for a new search ---
+            best_slope = -1;
+            best_y_int = 450;
+            best_score = 0;
+            currentIteration = 0;
+            
+            // Clear the canvas and redraw the points to start fresh
+            ctx.clearRect(0, 0, c.width, c.height);
+            draw_points_list(points);
+
+            // Kick off the animation loop
+            findBestFitStep();
+        }
+
+        // --- This function performs ONE STEP of the search ---
+        function findBestFitStep() {
+            // 1. Check the stop condition
+            if (currentIteration >= maxIterations) {
+                console.log("Search complete. Final score:", best_score);
+                return; // Stop the animation
+            }
+
+            // 2. Perform one iteration of the search logic
+            let guess_slope = Math.tan(Math.atan(best_slope) + (Math.random() - 0.5) * 360 / (1 + Math.log(currentIteration + 1)));
+            let guess_y_int = best_y_int + (Math.random() - 0.5) * 1000 / (1 + Math.log(currentIteration + 1));
+            let current_score = 0;
+
+            for (let i = 0; i < points.length; i++) {
+                const p = points[i];
+                const prediction_is_red = (p[1] < guess_slope * p[0] + guess_y_int);
+                if (prediction_is_red === (p[2] === red_label)) {
+                    current_score++;
+                }
+            }
+
+            // 3. If we found a new best, UPDATE and REDRAW
+            if (current_score > best_score) {
+                best_score = current_score;
+                best_slope = guess_slope;
+                best_y_int = guess_y_int;
+                
+                console.log(`New best at iteration ${currentIteration}: score ${best_score}`);
+
+                // --- MODIFIED: Redraw the canvas with background, points, and line ---
+                // 1. Draw the new light-colored background based on the classifier
+                drawBackground(best_slope, best_y_int);
+
+                // 2. Draw the original, darker points on top of the background
+                draw_points_list(points);
+
+                // 3. Draw the new best-fit line on top of everything
+                draw_line(0, best_y_int, CANVAS_WIDTH, best_y_int + CANVAS_WIDTH * best_slope, 'blue');
+            }
+
+            // 4. Schedule the next step
+            currentIteration++;
+            animationFrameId = requestAnimationFrame(findBestFitStep);
+        }
+
+        function StartFindingClassificationReLU() {
+
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            // initialize weights and other variables here
+            inputs = 2;
+            outputs = 1;
+            Hidden_Layers = 1; // Example number of hidden layers
+            Neurons_Per_Layer = 4; // Example neurons per layer
+            weights = [];
+            biases = [];
+            currentIteration = 0;
+            learning_rate = 0.1;
+
+            for (let i = 0; i < Hidden_Layers; i++) {
+                var weights_in_layer = [];
+                var num_neurons_in_previous_layer = (i === 0) ? inputs : Neurons_Per_Layer;
+
+                for (let j = 0; j < Neurons_Per_Layer; j++) {
+                    var weights_for_neuron = [];
+                    for (let k = 0; k < num_neurons_in_previous_layer; k++) {
+                        weights_for_neuron.push(Math.random() * 2 - 1); // Random weights between -1 and 1
+                    }
+                    weights_in_layer.push(weights_for_neuron);
+                }
+                weights.push(weights_in_layer);
+            }
+            console.log(weights);
+
+            var weights_for_output_neuron = [];
+            var weights_for_output_layer = [];
+            for (let i = 0; i < outputs; i++) {
+                for (let j = 0; j < Neurons_Per_Layer; j++) {
+                    weights_for_output_neuron.push(Math.random() * 2 - 1); // Random weights between -1 and 1
+                }
+                weights_for_output_layer.push(weights_for_output_neuron);
+            }
+            weights.push([weights_for_output_layer]);
+
+            for (let i = 0; i < Hidden_Layers; i++) {
+                var biases_in_layer = [];
+                for (let j = 0; j < Neurons_Per_Layer; j++) {
+                    biases_in_layer.push(Math.random() * 2 - 1); // Random biases between -1 and 1
+                }
+                biases.push(biases_in_layer);
+            }
+
+            var biases_for_output_neuron = [];
+            for (let i = 0; i < outputs; i++) {
+                biases_for_output_neuron.push(Math.random() * 2 - 1); // Random bias for output neuron
+            }
+            biases.push(biases_for_output_neuron);
+
+            ctx.clearRect(0, 0, c.width, c.height);
+            draw_points_list(points);
+
+            //draw neural network in canvas 2
+            ctx2.clearRect(0, 0, c2.width, c2.height);
+            draw_neural_network(weights, biases);
+
+            findClassificationReLU();
+
+        }
+        function runModelOnPoint(x, y) {
+            var z = []
+            var activations = [];
+            var input_vector = [x / CANVAS_WIDTH, y / CANVAS_HEIGHT]; // Normalize inputs
+            for (let layer = 0; layer < Hidden_Layers; layer++) {
+                var next_input_vector = [];
+                for (let neuron = 0; neuron < weights[layer].length; neuron++) {
+                    // weights dot input + bias
+                    var z_value = dot_product(weights[layer][neuron], input_vector) + biases[layer][neuron];
+                    z.push(z_value);
+                    var activation = relu(sigmoid(z_value));
+                    activations.push(activation);
+                    next_input_vector.push(activation);
+                }
+                input_vector = next_input_vector;
+            }
+            // Output layer
+            let output_vector = [];
+            for (let neuron = 0; neuron < weights[Hidden_Layers].length; neuron++) {
+                var z_value = dot_product(weights[Hidden_Layers][neuron], input_vector) + biases[Hidden_Layers][neuron];
+                z.push(z_value);
+                var activation = relu(sigmoid(z_value));
+                activations.push(activation);
+                output_vector.push(activation);
+            }
+            console.log("output_vector for point ", x, y, output_vector);
+
+            //draw_point based on output_vector
+            const predicted_color = interpolateColor('rgb(0, 150, 0)', 'rgb(150, 0, 0)', output_vector[0]);
+            draw_point(x, y, predicted_color);
+            return [output_vector, z, activations];
+        }
+
+        function findClassificationReLU() {
+            // Placeholder for ReLU classification logic
+            console.log("ReLU classification started. (Functionality to be implemented)");
+            if (currentIteration >= maxIterations) {
+                console.log("ReLU classification complete.");
+                return; // Stop the animation
+            }
+
+            // For each point, get the NN output and draw the point with color based on output
+            console.log("Classifying points at iteration ", currentIteration);
+            console.log("Weights: ", weights);
+            console.log("Biases: ", biases);
+            console.log("Points: ", points);
+            // run for all possible points on the canvas
+            for (let x = 0; x < CANVAS_WIDTH; x++) {
+                for (let y = 0; y < CANVAS_HEIGHT; y++) {
+                    runModelOnPoint(x, y);
+                }
+            }
+
+            draw_points_list(points);
+
+            // update weights and biases here based on some loss function (not implemented)
+            let delta = [];
+            for (let point = 0; point < points.length; point++) {
+                var p = points[point];
+                var output = runModelOnPoint(p[0], p[1])[0];
+                var z = runModelOnPoint(p[0], p[1])[1];
+                var activations = runModelOnPoint(p[0], p[1])[2];
+                var expected = (p[2] === red_label) ? 1 : 0;
+                var error = Math.pow(expected - output[0], 2);
+                // Backpropagation logic to update weights and biases would go here
+                // This is a placeholder and does not perform actual backpropagation
+                // last layer weights and biases
+                for (let neuron = 0; neuron < weights[weights.length - 1].length; neuron++) {
+                    for (let weight_idx = 0; weight_idx < weights[weights.length - 1][neuron].length; weight_idx++) {
+                        weights[weights.length - 1][neuron][weight_idx] = (expected - output[0]) * learning_rate * sigmoid_derivative(z[neuron]); // Simple update rule
+                    }
+                    biases[weights.length - 1][neuron] = (expected - output[0]) * learning_rate * sigmoid_derivative(z[neuron]);
+                }
+                for (let layer = 0; layer < weights.length; layer++) {
+                    for (let neuron = 0; neuron < weights[layer].length; neuron++) {
+                        for (let weight_idx = 0; weight_idx < weights[layer][neuron].length; weight_idx++) {
+                            weights[layer][neuron][weight_idx] += (Math.random() - 0.5) * 0.1;
+                        }
+                        biases[layer][neuron] += (Math.random() - 0.5) * 0.1;
+                    }
+                }
+            }
+
+            currentIteration++;
+            animationFrameId = requestAnimationFrame(findClassificationReLU);
+        }
+
+        function classify() {
+            const mySelect = document.getElementById('mySelect');
+            if (mySelect.value === 'line of best fit') {
+                startFindingBestFit();
+                // Note: The rest of this function will run before startFindingBestFit finishes.
+                // The animation loop is the part that visually updates the canvas.
+            }
+            else if (mySelect.value === 'relu classification') {
+                StartFindingClassificationReLU();
+            }
+            else if (mySelect.value === 'tanh classification') {
+                alert('Tanh classification not yet implemented.');
+            }
+        }
+    </script>
+    
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

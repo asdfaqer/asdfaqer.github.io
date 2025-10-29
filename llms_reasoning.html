@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.8.2/core.css"/>
+    <script defer src="https://pyscript.net/releases/2024.8.2/core.js"></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #bb1dff;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+.row a {
+    float: left;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.row a.sublink {
+    padding-left: 40px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* Change color on hover */
+.row a:hover {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+    
+<div class="header">
+  <h1>Will LLMs reach Human-Level Intelligence?</h1>
+  <p>The how and why LLMs reason. And what are the challenges they will face.</p>
+</div>
+
+<div class="navbar">
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>Contents</h2>
+    <div class="sublinks">
+        <a href="introduction.html" class="sublink" style="display:block; float:none;">Introduction</a>
+        <a href="neural_networks.html" class="sublink" style="display:block; float:none;">Neural Networks</a>
+        <a href="supervised_reinforcement_learning.html" class="sublink" style="display:block; float:none;">Supervised and Reinforcement Learning</a>
+        <a href="llms_reasoning.html" class="sublink" style="display:block; float:none;"><b>LLMs and Reasoning</b></a>
+        <a href="challenges_ahead.html" class="sublink" style="display:block; float:none;">Challenges Ahead</a>
+    </div>
+  </div>
+  <div class="main">
+    <h2>LLMs and Reasoning</h2>
+    <p>One prominent problem in AI was the problem of sequence transduction (the ability of models to reason on sequential information). The groundbreaking paper "attention is all you need" by Deepmind in [Date] indentified three key bottlenecks in prior models the handing of long contexts and speed. Take one of the most common sequence transduction problems: language modeling. 
+        In order for a model to predict the next word or letter in a phrase accurately it needs to properly encode the information from in the context. In addition, it has to be fast and efficient otherwise it would both be timeconsuming to train and less useful due to the higher cost to run when finished training. Thus, the team at deepmind proposed a new framework, known as
+         the transformers. With better context retention and being more parallelizable (and faster as result).</p>
+    <br>
+    <img src="transformer_vs_RNN.jpg" alt="transformer encoder compared with a RNN encoder" width="500" height="300"> </img>
+    <br>
+    <p>        
+        However, even with their new framework the complexity of language made translation and early language models terrible. For language modeling specifically, a model would need to be able to accurately understand tens of thousands of words how each those words are related across paragraphs. 
+        But seeing promise in the research, researchers at OpenAI released the gpt (generative pre-trained transformers) series where they progresivly increase the size of the model. 
+        Eventially Open AI released gpt 3.5, the most accurate language model at the time. Satisfied with its quaility, they came up with the idea to make it into a chatbot. To achieve this is much harder to achieve than at first glance.
+         They first provide a system prompt, which essentially can be thought of instructions for the model: who it was, how should it behave, the format which it output it responses. Then they fine tune the model through a process known as RLHF (reinforcement learning with human feedback) to make the language model more friendly and helpful. 
+        <br>
+        <br>
+        Actual System Prompt used by Anthropic for Claude Haiku 3: 
+        <br>
+    </p>
+
+    <div style="background-color: #333; color: white; padding: 10px; border-radius: 5px; white-space: pre-wrap; font-family: monospace; font-size: 10px;">
+        <pre>
+        The assistant is Claude, created by Anthropic. The current date is {{currentDateTime}}.
+        Claude’s knowledge base was last updated in August 2023 and it answers user questions about events before August 2023
+        and after August 2023 the same way a highly informed individual from August 2023 would if they were talking to someone from
+        {{currentDateTime}}. It should give concise responses to very simple questions, but provide thorough responses to more complex
+        and open-ended questions. It is happy to help with writing, analysis, question answering, math, coding, and all sorts of other tasks. 
+        It uses markdown for coding. It does not mention this information about itself unless the information is directly pertinent to the 
+        human’s query.
+        </pre>
+    </div>
+    <p>
+    [RLHF process]
+    </p>
+    <img src="Fine-Tuning-LLM-with-RLHF.png" alt="Fine Tuning LLM with RLHF" width="500" height="300">
+    <h2>Signs of Intelligence?</h2>
+    <p>
+        When their chatbot Chatgpt released, user saw glimpses of intelligence in its answers. This was an incredible surprising outcome for many. 
+        Somehow these language models learned to reason or at least appeared to have. 
+        One likely explanation is that in the model trying to predict humans accurately they developed an internal model of reasoning.
+         See a path forwards all the major AI labs rushed amply to the ability of language models to reason. 
+        There were two main methods for extracting the reasoning capability of language models, fine tuning, and prompting. 
+        Because the base of these language models are designed to predict the next token they are heavily context dependent. 
+        If you treat the model like it is a professor of mathematics, it is more likely to act more like a professor. 
+        Exploiting this feature, a paper called (find paper), added the string “think it through step by step” to language models and found that it improved its performance in mathematical, logical, and scientific tasks.
+        The other method was using reinforcement learning to modify the model itself to encourge this behavior. 
+        RLHF and RLVR are some of the tools used. Some researchers even hoped that these tools could teach new and novel behavior into the models. 
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+</body>
+</html>

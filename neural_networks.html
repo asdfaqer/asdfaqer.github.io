@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.8.2/core.css"/>
+    <script defer src="https://pyscript.net/releases/2024.8.2/core.js"></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #bb1dff;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+.row a {
+    float: left;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.row a.sublink {
+    padding-left: 40px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* Change color on hover */
+.row a:hover {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.image {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+    
+<div class="header">
+  <h1>Will LLMs reach Human-Level Intelligence?</h1>
+  <p>The how and why LLMs reason. And what are the challenges they will face.</p>
+</div>
+
+<div class="navbar">
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>Contents</h2>
+    <div class="sublinks">
+        <a href="introduction.html" class="sublink" style="display:block; float:none;">Introduction</a>
+        <a href="neural_networks.html" class="sublink" style="display:block; float:none;">Neural Networks</a>
+        <a href="supervised_reinforcement_learning.html" class="sublink" style="display:block; float:none;">Supervised and Reinforcement Learning</a>
+        <a href="llms_reasoning.html" class="sublink" style="display:block; float:none;">LLMs and Reasoning</a>
+        <a href="404.html" class="sublink" style="display:block; float:none;">Challenges Ahead</a>
+    </div>
+  </div>
+  <div class="main">
+    <h2>Neural Networks</h2>
+    <p>
+        In 1943, An neurophysisicist named Warren McCulloch and a mathemetician named Walter Pitts tryed to explain how neurons in the brain may work.
+        They created a simple model of a neuron using electrical circuits. Creating the first neural network.
+        <br>
+        Suprisingly neural networks were unpopular for many decades, however slow advances in the field of neural networks slowly shifted research.
+        Neural networks nowadays are the backbone of almost all modern machine learning systems, including LLMs. 
+    </p>
+    <h2>How Does it Work</h2>
+    <p>
+        While the inspiration come from the neural network of our brains, modern neural networks function differently. 
+        Let say we want model the behavior of students before a test using a single neuron. A single neuron (also known as a perseptron) takes in some inputs and scales them by their corresponding weight,
+        sums them together, before adding or subtracting some bais and outputing the result. As a student your desicions (Outputs) is influcence by the 
+        context (Inputs) of your specific situation. let assume that all students care about is the days till deadline and fondness of the course.
+        
+        Below represents corresponding neuron:
+    </p>
+    <img src=""> Image Doesn't Exist Yet </img>
+    <p>
+        A neural network connects mutiple neurons up layer by layer to increase the complexity. Often neural networks are divided into 3 parts:
+         the input layer, the hidden layers, the output layer. Using a neural netowrk instead to model the example we have.
+    </p>
+    <img src=""> Image Doesn't Exist Yet </img>
+
+    <h2>Training</h2>
+    <p>
+        A neural network by itself would simply output nonsense, however through the process known as "training" a neural network can learn patterns.
+        This can only be done if
+        <br>
+            1. There is a defined and easily mesurable goal
+        <br>
+            2. There is sufficent number examples
+        <br>
+            3. There is enough of a pattern to learn
+    </p>
+    <h2> The Bias-Varriance Tradeoff and Double Decent </h2>
+    <p>
+        Another very important concept is known as the bais-varriance tradeoff.
+         Where techniques that reduce varriance result in a increase in bias and the converse also holds.
+         In pratice this means that models should not be too big or too small.
+         As when their small(underfitting) their bias is small but variance is large,
+          and the otherway around for when the model is too big(overfitting).
+        The least error occurs when the model perfectly fix the data.
+    </p>
+    <img src="bias-varriance.png" width="500" height="300">
+    <p>
+        One perhaps more intuitive explaination for this behavior is that:
+        <br>
+         When the model is underfitting it is not big enougth to capture the pattern intrisic to the data.
+         <br>
+        When the model is overfitting it ends up learning the noise in the training data provided.
+    </p>
+
+    <p>
+        It unknown the exact cause for this phenomenon,
+         however under certain cricumstances the model beyond the point of overfitting may have it error drop back down.
+         This depends on the learning algorithm used the problem being solve and so many more factor many not understood. 
+        This phenomenon is known as double desent.  
+    </p>
+    <img src="double_desent.png" width="500" height="300"> 
+    <p>
+        One potential way to expain the phenomenon is that when really big models are essentially made up of many smaller models.
+        Generally the better smaller models making up the larger model learn faster. Thus when the model finish training it functions
+         equavalently to the better of the all the possible smaller model.
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>
