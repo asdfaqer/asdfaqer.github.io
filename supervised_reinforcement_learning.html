@@ -185,7 +185,7 @@ body {
     
     <select id="mySelect">
         <option value="line of best fit">line of best fit</option>
-        <option value="relu classification">relu classification</option>
+        <option value="classification"> classification</option>
         <option value="tanh classification">tanh classification</option>
     </select>
     
@@ -199,8 +199,8 @@ body {
         </canvas>
 
         <script>
-            const CANVAS_WIDTH = 500;
-            const CANVAS_HEIGHT = 500;
+            const CANVAS_WIDTH = 200;
+            const CANVAS_HEIGHT = 200;
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
             
@@ -342,9 +342,10 @@ body {
                         }
                     }
                 }
+                console.log(biases);
 
                 // Draw the output layer
-                let output_layer_size = weights[weights.length - 1][0].length;
+                let output_layer_size = outputs;
                 for (let i = 0; i < output_layer_size; i++) {
                     let neuron_x = 25 + (weights.length) * 100;
                     let neuron_y = i * 50 + shift_to_center_layer(output_layer_size);
@@ -393,7 +394,7 @@ body {
 
             // --- Reset the state for a new search ---
             best_slope = -1;
-            best_y_int = 450;
+            best_y_int = 75;
             best_score = 0;
             currentIteration = 0;
             
@@ -415,7 +416,7 @@ body {
 
             // 2. Perform one iteration of the search logic
             let guess_slope = Math.tan(Math.atan(best_slope) + (Math.random() - 0.5) * 360 / (1 + Math.log(currentIteration + 1)));
-            let guess_y_int = best_y_int + (Math.random() - 0.5) * 1000 / (1 + Math.log(currentIteration + 1));
+            let guess_y_int = best_y_int + (Math.random() - 0.5) * 500 / (1 + Math.log(currentIteration + 1));
             let current_score = 0;
 
             for (let i = 0; i < points.length; i++) {
@@ -450,7 +451,7 @@ body {
             animationFrameId = requestAnimationFrame(findBestFitStep);
         }
 
-        function StartFindingClassificationReLU() {
+        function StartFindingClassification() {
 
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
@@ -481,15 +482,21 @@ body {
             }
             console.log(weights);
 
-            var weights_for_output_neuron = [];
-            var weights_for_output_layer = [];
+            
+            // --- CORRECTED Output Layer Weight Initialization ---
+            var output_layer_weights = []; // This will be the layer group, e.g., weights[1]
+            var num_inputs_to_output_layer = Neurons_Per_Layer;
+
+            // For each neuron 'i' in the output layer...
             for (let i = 0; i < outputs; i++) {
-                for (let j = 0; j < Neurons_Per_Layer; j++) {
-                    weights_for_output_neuron.push(Math.random() * 2 - 1); // Random weights between -1 and 1
+                var weights_for_one_neuron = [];
+                // ...create a weight 'j' for each connection from the previous layer
+                for (let j = 0; j < num_inputs_to_output_layer; j++) {
+                    weights_for_one_neuron.push(Math.random() * 2 - 1);
                 }
-                weights_for_output_layer.push(weights_for_output_neuron);
+                output_layer_weights.push(weights_for_one_neuron);
             }
-            weights.push([weights_for_output_layer]);
+            weights.push(output_layer_weights); // Add the new layer's weights
 
             for (let i = 0; i < Hidden_Layers; i++) {
                 var biases_in_layer = [];
@@ -512,35 +519,47 @@ body {
             ctx2.clearRect(0, 0, c2.width, c2.height);
             draw_neural_network(weights, biases);
 
-            findClassificationReLU();
+            findClassification();
 
         }
         function runModelOnPoint(x, y) {
-            var z = []
+            // This will store pre-activation values for ALL layers
+            var z = [];
+            // This will store activations for ALL layers, INCLUDING the input layer
             var activations = [];
-            var input_vector = [x / CANVAS_WIDTH, y / CANVAS_HEIGHT]; // Normalize inputs
-            for (let layer = 0; layer < Hidden_Layers; layer++) {
-                var next_input_vector = [];
+
+            // Create the initial activation layer (a^0) from the normalized inputs
+            var current_activations = [x / CANVAS_WIDTH, y / CANVAS_HEIGHT];
+            activations.push(current_activations);
+
+            // Single loop for ALL layers (hidden + output)
+            // Assumes `weights.length` is the total number of layers minus one.
+            for (let layer = 0; layer < weights.length; layer++) {
+                var next_activations = [];
+                var z_layer = [];
+
+                // For each neuron in the current layer...
                 for (let neuron = 0; neuron < weights[layer].length; neuron++) {
-                    // weights dot input + bias
-                    var z_value = dot_product(weights[layer][neuron], input_vector) + biases[layer][neuron];
-                    z.push(z_value);
-                    var activation = relu(sigmoid(z_value));
-                    activations.push(activation);
-                    next_input_vector.push(activation);
+                    // Calculate z = w • a + b
+                    // `current_activations` is the output from the previous layer
+                    var z_value = dot_product(weights[layer][neuron], current_activations) + biases[layer][neuron];
+                    z_layer.push(z_value);
+
+                    // Calculate the activation a = sigmoid(z)
+                    var activation = sigmoid(z_value);
+                    next_activations.push(activation);
                 }
-                input_vector = next_input_vector;
+
+                // Store the results for this layer
+                z.push(z_layer);
+                activations.push(next_activations);
+
+                // The output of this layer is the input for the next
+                current_activations = next_activations;
             }
-            // Output layer
-            let output_vector = [];
-            for (let neuron = 0; neuron < weights[Hidden_Layers].length; neuron++) {
-                var z_value = dot_product(weights[Hidden_Layers][neuron], input_vector) + biases[Hidden_Layers][neuron];
-                z.push(z_value);
-                var activation = relu(sigmoid(z_value));
-                activations.push(activation);
-                output_vector.push(activation);
-            }
-            console.log("output_vector for point ", x, y, output_vector);
+
+            // The final output is the last element in the activations array
+            let output_vector = activations[activations.length - 1];
 
             //draw_point based on output_vector
             const predicted_color = interpolateColor('rgb(0, 150, 0)', 'rgb(150, 0, 0)', output_vector[0]);
@@ -548,11 +567,11 @@ body {
             return [output_vector, z, activations];
         }
 
-        function findClassificationReLU() {
-            // Placeholder for ReLU classification logic
-            console.log("ReLU classification started. (Functionality to be implemented)");
+        function findClassification() {
+            // Placeholder for classification logic
+            console.log("classification started. (Functionality to be implemented)");
             if (currentIteration >= maxIterations) {
-                console.log("ReLU classification complete.");
+                console.log("classification complete.");
                 return; // Stop the animation
             }
 
@@ -570,36 +589,117 @@ body {
 
             draw_points_list(points);
 
-            // update weights and biases here based on some loss function (not implemented)
-            let delta = [];
+            // update weights and biases here based on some loss function MSE
             for (let point = 0; point < points.length; point++) {
+                var delta = [];
                 var p = points[point];
-                var output = runModelOnPoint(p[0], p[1])[0];
-                var z = runModelOnPoint(p[0], p[1])[1];
-                var activations = runModelOnPoint(p[0], p[1])[2];
+                var Model_Data = runModelOnPoint(p[0], p[1])
+                var output = Model_Data[0];
+                var z = Model_Data[1];
+                var activations = Model_Data[2];
                 var expected = (p[2] === red_label) ? 1 : 0;
                 var error = Math.pow(expected - output[0], 2);
+                var new_weights = [];
+                var new_biases = [];
+                console.log("output_vector for point ", p[0], p[1], output);
                 // Backpropagation logic to update weights and biases would go here
                 // This is a placeholder and does not perform actual backpropagation
-                // last layer weights and biases
-                for (let neuron = 0; neuron < weights[weights.length - 1].length; neuron++) {
-                    for (let weight_idx = 0; weight_idx < weights[weights.length - 1][neuron].length; weight_idx++) {
-                        weights[weights.length - 1][neuron][weight_idx] = (expected - output[0]) * learning_rate * sigmoid_derivative(z[neuron]); // Simple update rule
-                    }
-                    biases[weights.length - 1][neuron] = (expected - output[0]) * learning_rate * sigmoid_derivative(z[neuron]);
+                // last layer weights and biase
+                console.log("z:" + z + " biases" + biases);
+                var delta_layer = [];
+                for (let neuron = 0; neuron < outputs; neuron++){
+                    delta_value = (output[neuron] - expected) * sigmoid_derivative(z[z.length-1][neuron]);
+                    delta_layer.push(delta_value);
                 }
-                for (let layer = 0; layer < weights.length; layer++) {
-                    for (let neuron = 0; neuron < weights[layer].length; neuron++) {
-                        for (let weight_idx = 0; weight_idx < weights[layer][neuron].length; weight_idx++) {
-                            weights[layer][neuron][weight_idx] += (Math.random() - 0.5) * 0.1;
+
+                delta.push(delta_layer);
+
+                // ... after calculating the output delta ...
+                // delta array currently holds: [ output_delta_layer ]
+
+                // Loop from the last hidden layer backwards to the first
+                for (let layer = weights.length - 2; layer >= 0; layer--) {
+                    var delta_layer = [];
+                    var next_delta = delta[delta.length - 1]; // Delta from layer l+1
+
+                    // For each neuron 'j' in the current layer 'l'
+                    for (let j = 0; j < weights[layer].length; j++) {
+                        var error_sum = 0;
+
+                        // For each neuron 'k' in the next layer 'l+1'
+                        for (let k = 0; k < next_delta.length; k++) {
+                            // Get weight from neuron 'j' (current) to neuron 'k' (next)
+                            // This is weights[layer + 1][k][j]
+                            error_sum += weights[layer + 1][k][j] * next_delta[k];
                         }
-                        biases[layer][neuron] += (Math.random() - 0.5) * 0.1;
+
+                        var delta_value = error_sum * sigmoid_derivative(z[layer][j]);
+                        delta_layer.push(delta_value);
                     }
+                    delta.push(delta_layer); // Push the delta for the current layer
                 }
+
+                //filp delta list
+                var new_delta = [];
+                for (let i = delta.length -1; i >= 0; i--){
+                    new_delta.push(delta[i]);
+                }
+                delta = new_delta;
+
+                //calculate gradiant
+                var gradiant_biases = [];
+                var gradiant_weights = [];
+                for (let layer = 0; layer < weights.length; layer++){
+                    var gradiant_biases_layer = [];
+                    var gradiant_weights_layer = [];
+                    // ...
+                    for (let neuron = 0; neuron < weights[layer].length; neuron++){
+                        var gradiant_biases_value = delta[layer][neuron];
+                        var gradiant_weights_neuron = [];
+
+                        // --- FIXED LOOP BOUND ---
+                        for (let weight = 0; weight < activations[layer].length; weight++){ 
+                            var gradiant_weights_value = delta[layer][neuron] * activations[layer][weight];
+                            gradiant_weights_neuron.push(gradiant_weights_value);
+                        }
+                        gradiant_weights_layer.push(gradiant_weights_neuron);
+                        gradiant_biases_layer.push(gradiant_biases_value);
+                    }
+                    gradiant_biases.push(gradiant_biases_layer);
+                    gradiant_weights.push(gradiant_weights_layer);
+                }
+                console.log("gb:" + gradiant_biases);
+                console.log("gw:" + gradiant_weights);
+
+                //change weights and biases
+                var new_biases = [];
+                var new_weights = [];
+                for (let layer = 0; layer < weights.length; layer++){
+                    var new_biases_layer = [];
+                    var new_weights_layer = [];
+                    for (let neuron = 0; neuron < weights[layer].length; neuron++){
+                        var new_biases_value = biases[layer][neuron] -learning_rate * gradiant_biases[layer][neuron];
+                        var new_weights_neuron = [];
+                        // ...
+                        new_biases_layer.push(new_biases_value);
+                        // v-- CORRECTION --v
+                        for (let weight = 0; weight < weights[layer][neuron].length; weight++){
+                            var new_weights_value = weights[layer][neuron][weight] - learning_rate * gradiant_weights[layer][neuron][weight];
+                            new_weights_neuron.push(new_weights_value);
+                        }
+                        // ...
+                        new_weights_layer.push(new_weights_neuron);
+                    }
+                    new_biases.push(new_biases_layer);
+                    new_weights.push(new_weights_layer);
+                }
+                biases = new_biases;
+                weights = new_weights;
+
             }
 
             currentIteration++;
-            animationFrameId = requestAnimationFrame(findClassificationReLU);
+            animationFrameId = requestAnimationFrame(findClassification);
         }
 
         function classify() {
@@ -609,8 +709,8 @@ body {
                 // Note: The rest of this function will run before startFindingBestFit finishes.
                 // The animation loop is the part that visually updates the canvas.
             }
-            else if (mySelect.value === 'relu classification') {
-                StartFindingClassificationReLU();
+            else if (mySelect.value === 'classification') {
+                StartFindingClassification();
             }
             else if (mySelect.value === 'tanh classification') {
                 alert('Tanh classification not yet implemented.');
