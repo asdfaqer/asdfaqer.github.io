@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.8.2/core.css"/>
+    <script defer src="https://pyscript.net/releases/2024.8.2/core.js"></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #bb1dff;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+.row a {
+    float: left;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.row a.sublink {
+    padding-left: 40px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* Change color on hover */
+.row a:hover {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.image {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+    
+<div class="header">
+  <h1>Will LLMs reach Human-Level Intelligence?</h1>
+  <p>The how and why LLMs reason. And what are the challenges they will face.</p>
+</div>
+
+<div class="navbar">
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>Contents</h2>
+    <div class="sublinks">
+        <a href="introduction.html" class="sublink" style="display:block; float:none;">Introduction</a>
+        <a href="neural_networks.html" class="sublink" style="display:block; float:none;">Neural Networks</a>
+        <a href="supervised_reinforcement_learning.html" class="sublink" style="display:block; float:none;">Supervised and Reinforcement Learning</a>
+        <a href="llms_reasoning.html" class="sublink" style="display:block; float:none;">LLMs and Reasoning</a>
+        <a href="challenges_ahead.html" class="sublink" style="display:block; float:none;">Challenges Ahead</a>
+    </div>
+  </div>
+  <div class="main">
+    <h2>Trouble in Paradise</h2>
+
+    <p>
+        If one is supposed to believe the hype surrounding LLMs, then it would seem that human-level intelligence has already been achieved.
+        Then the question becomes, how come these models are so prone to hallucinations. And is something truly intelligent if it
+        cannot even learn. While these models are hailed as the pinnacle of AI/ML research, their inability to learn as humans do is ironic.
+    </p>
+    <br>
+    <h2>The Stochastic Parrot</h2>
+    <p>
+        LLMs are often criticized for being "stochastic parrots", a term coined by Bender et al. in their 2021 paper "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?".
+        The term refers to the idea that LLMs are simply repeating patterns they have seen in their training data, without any true understanding of the meaning behind the words.
+        This is true to an extent, the way LLMs think is fundamentally different from the way humans think. Humans learn and understand thing through
+        experience and interaction with the world, while LLMs learn through statistical patterns in large datasets. This difference in learning methods leads to 
+        jagged intelligence, where LLMs due to high exposure with all kinds of technical documents, seems to have a deep understanding of all technical topics no human could replecate, ranging from medicene to law.
+        However these same models struggle with more abstract tasks, such basic as common sense reasoning no human would struggle with.
+    </p>
+        <br>
+        <h2>Hallucinations</h2>
+        <p>
+            One of the most glaring issues with LLMs is their tendency to hallucinate. Hallucinations refer to the phenomenon where LLMs generate text that is not grounded in reality.
+            For example, an LLM may generate a response to a question that is factually incorrect or nonsensical. Hallucinations are a consequence of how LLMs are trained. To demonstarte this
+            consider how humans repond to question they do not know the answer to. A human would first try to recall any relevant information they may have learned in the past. 
+            And once relizing they do not know the answer, they would respond with "I don't know" or "I'm not sure". LLMs on the other hand, do not have the ability to reflect on their own knowledge.
+            Instead, they end up lying or generating false information. LLM can't know what they do not know, they can only generate the most probable response based on their training data.
+          </p>
+          <img src="./hallucination_example.png" alt="Example of LLM Hallucination" style="width:100%;max-width:600px;">
+          <p style="font-size: 12px; text-align: center;">An example of DeepSeek confidently denying the death of Charlie Kirk. Including falsely claiming the September 2025 is in the future.</p>
+          <br>
+          <h2>Continoualy Learning</h2>
+        <p>
+            The biggest argument against LLMs reaching human-level intelligence amoung AI researchers is their inability to learn in the traditional sense. Humans learn through experience, interaction, and reflection. We can take in new information, process it, and adjust our understanding of the world accordingly.
+            LLMs on the other hand, do not learn in this way. They are trained on a fixed dataset and once training is complete, they cannot learn new information. While LLMs do have the ability to perform in-context learning, where they can adapt their responses based on the context of the conversation, this is not the same as true learning.
+            In a podcast with Dwarkesh Patel, Richard Sutton, an award winning AI researcher, explains his doubts over the scaling of LLMs creating “AGI” and stresses the importance of continual learning which LLMs
+             are incapable of doing. "... they will respond to that question right. But they have no prediction in the substantive sense that they won’t be surprised by what happens. If something happens that isn’t
+              what you might say they predicted, they will not change because an unexpected thing has happened. To learn that, they’d have to make an adjustment."
+          </p>
+          <h2>References</h2>
+          <p style="padding-left: 36px; text-indent: -36px;">
+            Bender, Emily M., et al. "On the dangers of stochastic parrots: Can language models be too big?" Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency. 2021.
+          </p>
+          <p style="padding-left: 36px; text-indent: -36px;">
+            Patel, Dwarkesh. "Richard Sutton on the bitter lesson, the history of RL, and the future of AI." Dwarkesh Podcast, 24 Mar. 2024, <a href="https://www.dwarkesh.com/p/richard-sutton">https://www.dwarkesh.com/p/richard-sutton</a>.
+          </p>
+
+          </div>
+        </div>
+
+        <div class="footer">
+          <h2>Footer</h2>
+        </div>
+
+        </body>
+</html>

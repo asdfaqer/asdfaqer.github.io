@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Mockup - Day Intro & Dawn Lighthouse</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- PAGE 1: INTRO ANIMATION --- */
+        #intro-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 40%, #0077be 100%);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        /* Centered Quote Text */
+        .quote-container {
+            position: absolute;
+            /* UPDATED: Moved up to 25% so the rising water doesn't cover it */
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 20; 
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .fade-text {
+            opacity: 0;
+            animation: text-fade-in 1.5s ease-in-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .text-1 { animation-delay: 1s; font-size: 2em; font-weight: bold; margin-bottom: 10px;}
+        .text-2 { animation-delay: 2.5s; font-size: 1.2em; font-style: italic;}
+
+        @keyframes text-fade-in { to { opacity: 1; } }
+
+        /* Cargo Ship Graphic & Animation */
+        .cargo-ship-wrapper {
+            position: absolute;
+            /* UPDATED: Raised ship from 20% to 35% to match new water level */
+            bottom: 35%; 
+            left: -600px; 
+            z-index: 5; 
+            animation: ship-sail 10s linear forwards; 
+        }
+
+        .cargo-ship {
+            position: relative;
+            width: 1100px;
+            height: 240px;
+            animation: ship-bob 3s ease-in-out infinite;
+        }
+        
+        @keyframes ship-bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        .hull {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: #2c2c2c; 
+            border-top: 3px solid #555;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 15% 100%);
+        }
+
+        .bridge-structure {
+            position: absolute;
+            bottom: 100px;
+            right: 30px;
+            width: 140px;
+            height: 120px;
+            background: #f4f4f4;
+            border: 2px solid #999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 10px;
+        }
+        .bridge-window { width: 90%; height: 10px; background: #333; margin-bottom: 5px; }
+
+        .chimney {
+            position: absolute;
+            bottom: 220px;
+            right: 45px;
+            width: 40px;
+            height: 60px;
+            background: #333;
+        }
+
+        .deck-cargo {
+            position: absolute;
+            bottom: 100px;
+            left: 60px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        .cont-stack { display: flex; flex-direction: column-reverse; gap: 1px;}
+        .cont { width: 45px; height: 25px; border: 1px solid rgba(0,0,0,0.3); box-shadow: inset 0 0 5px rgba(0,0,0,0.1);}
+        .c-red { background: #b93b3b; }
+        .c-blue { background: #2e5d9c; }
+        .c-green { background: #3a9c2e; }
+        .c-yellow { background: #d4c027; }
+
+        @keyframes ship-sail {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 700px)); } 
+        }
+
+        /* Ocean Waves Animation */
+        .ocean-back {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            /* UPDATED: Increased height from 50% to 65% */
+            height: 95%; 
+            z-index: 4; 
+            opacity: 0.8;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" fill="%23005b96"><path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: 50% 100%;
+            animation: wave-move 15s linear infinite reverse;
+        }
+
+        .ocean-front {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            /* UPDATED: Increased height from 45% to 60% */
+            height: 82%; 
+            z-index: 10; 
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" fill="%230077be"><path d="M0,192L60,186.7C120,181,240,171,360,176C480,181,600,203,720,208C840,213,960,203,1080,192C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
+            background-size: 50% 100%;
+            animation: wave-move 10s linear infinite;
+        }
+        @keyframes wave-move {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* --- PAGE 2: MAIN CONTENT --- */
+        #main-page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER CSS --- */
+        .main-header {
+            background: linear-gradient(to bottom, #776998 0%, #97758d 100%);
+            border-bottom: 2px solid #ccc;
+            height: 180px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-title {
+            font-size: 3em;
+            font-weight: bold;
+            z-index: 5;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.4); 
+        }
+
+        /* Header Landscape Elements */
+        .header-water-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background: #5d5d8c; 
+            z-index: 1;
+        }
+
+        .header-land-bg {
+            position: absolute;
+            bottom: 20px;
+            right: 0;
+            width: 250px;
+            height: 60px;
+            background: #444; 
+            border-radius: 100% 0 0 0;
+            z-index: 2;
+        }
+
+        /* Lighthouse Container */
+        .lighthouse-container {
+            position: absolute;
+            bottom: 70px;
+            right: 50px;
+            width: 40px;
+            height: 80px;
+            z-index: 20;
+        }
+
+        /* The Tower */
+        .lighthouse-tower {
+            width: 30px;
+            height: 60px;
+            background: repeating-linear-gradient(
+                45deg,
+                #d9534f,
+                #d9534f 10px,
+                #f4f4f4 10px,
+                #f4f4f4 20px
+            );
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            border: 1px solid #999;
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+        /* The Lamp Room */
+        .lighthouse-lamp {
+            width: 40px;
+            height: 25px;
+            background: #333;
+            position: absolute;
+            top: -5px;
+            left: 0;
+            border-radius: 4px;
+            z-index: 2; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+        }
+        
+        /* The Lightbulb (Source of ray) */
+        .bulb {
+            width: 15px;
+            height: 15px;
+            background: #ffffcc;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffff00;
+            z-index: 2; 
+        }
+
+        /* The Ray of Light */
+        .light-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1200px; 
+            height: 400px; 
+            background: linear-gradient(90deg, rgba(255, 255, 220, 0.9), transparent);
+            transform-origin: 0% 50%; 
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            transform: translate(0, -50%) rotate(180deg);
+            z-index: 1; 
+            pointer-events: none;
+            animation: ray-flicker 0.5s infinite alternate;
+        }
+
+        @keyframes ray-flicker {
+            0% {
+                opacity: 0.8;
+                background: linear-gradient(90deg, rgba(255, 255, 220, 0.9), transparent);
+            }
+            100% {
+                opacity: 1;
+                background: linear-gradient(90deg, rgba(255, 255, 240, 1.0), transparent);
+            }
+        }
+
+        /* --- Sidebar & Content (Unchanged) --- */
+        .content-container {
+            display: flex;
+            min-height: calc(100vh - 180px);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #e0e0e0;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 2px solid #ccc;
+        }
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin-bottom: 10px; }
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s, font-weight 0.3s;
+        }
+        .sidebar ul ul { margin-left: 20px; margin-top: 5px; }
+        .sidebar a.active {
+            background: #a8d0e6;
+            font-weight: bold;
+            border: 2px solid #555;
+        }
+
+        .main-content { flex: 1; padding: 40px; }
+        section { margin-bottom: 100px; padding-top: 20px; }
+        h2 { margin-bottom: 20px; }
+        h3 { margin-bottom: 15px; color: #555; }
+        p { margin-bottom: 15px; line-height: 1.6; }
+        .content-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            background: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            border: 2px dashed #999;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-page">
+        <div class="quote-container">
+            <div class="fade-text text-1">"[Without trade restrictions] the obvious and simple system of natural liberty establishes itself of its own accord. Every man...is left perfectly free to pursue his own interest in his own way.... The sovereign is completely discharged from a duty [for which] no human wisdom or knowledge could ever be sufficient; the duty of superintending the industry of private people, and of directing it towards the employments most suitable to the interest of the society."</div>
+            <div class="fade-text text-2">- Adam Smith</div>
+        </div>
+        <div class="ocean-back"></div>
+        <div class="cargo-ship-wrapper">
+            <div class="cargo-ship">
+                <div class="chimney"></div>
+                <div class="bridge-structure">
+                    <div class="bridge-window"></div>
+                    <div class="bridge-window"></div>
+                </div>
+                <div class="deck-cargo">
+                    <div class="cont-stack"><div class="cont c-red"></div></div>
+                    <div class="cont-stack"><div class="cont c-blue"></div><div class="cont c-blue"></div></div>
+                    <div class="cont-stack"><div class="cont c-green"></div></div>
+                    <div class="cont-stack"><div class="cont c-yellow"></div><div class="cont c-red"></div><div class="cont c-blue"></div></div>
+                    <div class="cont-stack"><div class="cont c-red"></div><div class="cont c-green"></div></div>
+                    <div class="cont-stack"><div class="cont c-blue"></div></div>
+                </div>
+                <div class="hull"></div>
+            </div>
+        </div>
+        <div class="ocean-front"></div>
+    </div>
+
+    <div id="main-page">
+        
+        <header class="main-header">
+            <h1 class="header-title">Trade</h1>
+            
+            <div class="header-water-bg"></div>
+            <div class="header-land-bg"></div>
+            
+            <div class="lighthouse-container">
+                <div class="lighthouse-lamp">
+                    <div class="light-ray"></div>
+                    <div class="bulb"></div>
+                </div>
+                <div class="lighthouse-tower"></div>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <nav class="sidebar">
+                <ul>
+                    <li><a href="#homepage" class="nav-link active">home page</a></li>
+                    <li>
+                        <a href="#topic1" class="nav-link">Topic 1</a>
+                        <ul>
+                            <li><a href="#subtopic1-1" class="nav-link">Subtopic 1.1</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#topic2" class="nav-link">Topic 2</a>
+                        <ul>
+                            <li><a href="#subtopic2-1" class="nav-link">Subtopic 2.1</a></li>
+                            <li><a href="#subtopic2-2" class="nav-link">next subtopic</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#topic3" class="nav-link">Topic 3</a>
+                        <ul>
+                            <li><a href="#subtopic3-1" class="nav-link">Subtopic 3.1</a></li>
+                            <li><a href="#subtopic3-2" class="nav-link">next subtopic</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+                <section id="Domestic employments impacts of trade barriers">
+                    <h2>Domestic impacts of trade barriers</h2>
+                    <p>The debate over the impacts of tariffs, quotas, and other trade barriers 
+                        is becoming increasingly relevant in today's global economic enviroment 
+                        as trade relationships are being questioned around the world.
+                         Notibly the current administration of world's leading economic
+                          power (United States of America) both announcing and treating more 
+                          protectionist policies and increased tariffs across the world. 
+                        Proponents argue that increasing trade barriers is necessary to protect domestic industries and jobs. 
+                        However, the data shows a different picture. Trade barriers like tariffs and quotas lead to less domestic competition as 
+                    domestic industries face less pressure to innovate harming job growth. While export barriers prevent domestic industries from accessing foreign markets,
+                     reducing their growth potential and preventing the creation of higher skill jobs and industries. Additionally, Alternatives to trade barriers like subsities to key domestic
+                     industries can often be more effective. While the worsening relations between countries can complicate trade policies and 
+                     instead of providing a better deal end up just producing worse outcomes.
+                    <div class="content-image">Image Placeholder</div>
+                </section>
+
+                <section id="Trade and Competition">
+                    <h2>Trade and Competition</h2>
+                    <p>Almost all economic theories will agree on the positive impacts of competition especially for the context of employment.
+                         Highly competitive industries employ more workers and offer greater wages as companies have to fight to attract the best talent.
+                        This theory is also supportated by empirical evidence from various industries around the world. The world bank relased a report in 2020
+                    entitled "The Effects of Competition on Jobs and Economic Transformations", showed empirical evidence of this correlation. However, an argument could be made 
+                    that foriegn producer don't compete for the same workers so the benifits of competion doen't apply. But that misunderstands why competition drives
+                employment, employment increase as competition forces domestic corporations invest more in their workforce and other ajacent industries in an effort to keep up.
+                </p>
+                </section>
+
+                <section id="Trade and Specialization">
+                    <h2>Trade and Specialization</h2>
+                    <p>Another benifit of free trade is the ability for a country to specialize in the production of goods and services that it can produce most efficiently.
+                        Without export tariffs domestic enterprises can afford to produce more as international demand increases and thus increase it employment footprint.
+                        This is supported by evidence, for example the NBER shows that tarifs lead to higher unemployment in medium to long termss.
+                </section>
+
+
+                <section id="Trade Barriers Alternatives">
+                    <h2>Trade Barriers Alternatives</h2>
+                    <p>Oftentimes, alternatives are ignored in these debates; however, alternatives like domestic subsidies can be more effective in supporting key industries without the negative impacts of trade barriers.
+                        Subsidies as shown in the Chinese ev industry are able to prop up industry until the are self sufficient without the negatives of trade barriers.
+                    </p>
+                </section>
+                    <div class="content-image">Another Image</div>
+                </section>
+
+                <section id="Game Theory of Trade Barriers">
+                    <h2>Game Theory of Trade Barriers</h2>
+                    <p>Proponents of increased trade barriers sometimes agure that they are great negociting tools to achieve a better trade deal.
+                     However, Evidence has shown that the most common responce is retaliation and escalation. As with Usa-Canada and Usa-europe trade fiasco the general outcome seems
+                     to be retaliation and escalation. And the costs of retaliation has been proven to be significant and detremental to the welfare of the american populous.
+                     A paper entitled "Making America great again? The economic impacts of Liberation Day tariffs" showed that for the Liberation Day tariffs with retaliation the tariffs will result in 
+                     worse welfare outcomes. The cost of retaliation and escalation often outweighs any potential benefits in the long run from trade negotiation.
+                    </p>
+                    <img src="payoff_matrix.png" alt="Payoff Matrix">
+                    <div style="height: 500px;"></div>
+                </section>
+
+                <section id="Reliance Problem">
+                    <h3>next subtopic</h3>
+                    <p>This is the final subtopic block mentioned in your sketch.</p>
+                    <div style="height: 500px;"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const introPage = document.getElementById('intro-page');
+            const mainPage = document.getElementById('main-page');
+            const animationDuration = 10000; 
+
+            setTimeout(() => {
+                introPage.style.opacity = '0';
+                introPage.style.transition = 'opacity 1s ease';
+                setTimeout(() => {
+                    introPage.style.display = 'none';
+                    mainPage.style.display = 'block';
+                    updateActiveNav();
+                }, 1000); 
+            }, animationDuration); 
+
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+
+            function updateActiveNav() {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (currentSectionId) {
+                    const activeLink = document.querySelector(`.sidebar a[href="#${currentSectionId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        const parentItem = activeLink.closest('ul').closest('li');
+                        if (parentItem) {
+                            const parentLink = parentItem.querySelector('a.nav-link');
+                             if (parentLink && parentLink !== activeLink) {
+                                 parentLink.classList.add('active');
+                             }
+                        }
+                    }
+                } else if (window.scrollY < 100) {
+                    document.querySelector('.sidebar a[href="#homepage"]').classList.add('active');
+                }
+            }
+            window.addEventListener('scroll', updateActiveNav);
+        });
+    </script>
+</body>
+</html>
