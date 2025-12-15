@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wireframe Mockup - Day Intro & Dawn Lighthouse</title>
     <style>
-        /* Reset and Base Styles */
+        /* --- RESET AND BASE STYLES --- */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -31,35 +31,42 @@
         /* Centered Quote Text */
         .quote-container {
             position: absolute;
-            /* UPDATED: Moved up to 25% so the rising water doesn't cover it */
-            top: 45%;
+            top: 45%; /* Moved up so rising water doesn't cover it */
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            z-index: 20; 
+            z-index: 20;
             width: 80%;
             max-width: 600px;
         }
-        
+
         .fade-text {
             opacity: 0;
             animation: text-fade-in 1.5s ease-in-out forwards;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        .text-1 { animation-delay: 1s; font-size: 2em; font-weight: bold; margin-bottom: 10px;}
-        .text-2 { animation-delay: 2.5s; font-size: 1.2em; font-style: italic;}
+        .text-1 {
+            animation-delay: 1s;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .text-2 {
+            animation-delay: 2.5s;
+            font-size: 1.2em;
+            font-style: italic;
+        }
 
         @keyframes text-fade-in { to { opacity: 1; } }
 
         /* Cargo Ship Graphic & Animation */
         .cargo-ship-wrapper {
             position: absolute;
-            /* UPDATED: Raised ship from 20% to 35% to match new water level */
-            bottom: 35%; 
-            left: -600px; 
-            z-index: 5; 
-            animation: ship-sail 10s linear forwards; 
+            bottom: 35%; /* Raised to match water level */
+            left: -600px;
+            z-index: 5;
+            animation: ship-sail 10s linear forwards;
         }
 
         .cargo-ship {
@@ -68,7 +75,7 @@
             height: 240px;
             animation: ship-bob 3s ease-in-out infinite;
         }
-        
+
         @keyframes ship-bob {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
@@ -79,7 +86,7 @@
             bottom: 0;
             width: 100%;
             height: 100px;
-            background: #2c2c2c; 
+            background: #2c2c2c;
             border-top: 3px solid #555;
             clip-path: polygon(0 0, 100% 0, 95% 100%, 15% 100%);
         }
@@ -98,7 +105,12 @@
             justify-content: flex-start;
             padding-top: 10px;
         }
-        .bridge-window { width: 90%; height: 10px; background: #333; margin-bottom: 5px; }
+        .bridge-window {
+            width: 90%;
+            height: 10px;
+            background: #333;
+            margin-bottom: 5px;
+        }
 
         .chimney {
             position: absolute;
@@ -117,8 +129,13 @@
             align-items: flex-end;
             gap: 2px;
         }
-        .cont-stack { display: flex; flex-direction: column-reverse; gap: 1px;}
-        .cont { width: 45px; height: 25px; border: 1px solid rgba(0,0,0,0.3); box-shadow: inset 0 0 5px rgba(0,0,0,0.1);}
+        .cont-stack { display: flex; flex-direction: column-reverse; gap: 1px; }
+        .cont {
+            width: 45px;
+            height: 25px;
+            border: 1px solid rgba(0,0,0,0.3);
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
         .c-red { background: #b93b3b; }
         .c-blue { background: #2e5d9c; }
         .c-green { background: #3a9c2e; }
@@ -126,7 +143,7 @@
 
         @keyframes ship-sail {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(100vw + 700px)); } 
+            100% { transform: translateX(calc(100vw + 700px)); }
         }
 
         /* Ocean Waves Animation */
@@ -135,9 +152,8 @@
             bottom: 0;
             left: 0;
             width: 200%;
-            /* UPDATED: Increased height from 50% to 65% */
-            height: 95%; 
-            z-index: 4; 
+            height: 95%; /* Increased height */
+            z-index: 4;
             opacity: 0.8;
             background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" fill="%23005b96"><path d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
             background-size: 50% 100%;
@@ -149,13 +165,13 @@
             bottom: 0;
             left: 0;
             width: 200%;
-            /* UPDATED: Increased height from 45% to 60% */
-            height: 82%; 
-            z-index: 10; 
+            height: 82%; /* Increased height */
+            z-index: 10;
             background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" fill="%230077be"><path d="M0,192L60,186.7C120,181,240,171,360,176C480,181,600,203,720,208C840,213,960,203,1080,192C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>');
             background-size: 50% 100%;
             animation: wave-move 10s linear infinite;
         }
+
         @keyframes wave-move {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
@@ -167,35 +183,34 @@
             min-height: 100vh;
         }
 
-        /* --- HEADER CSS --- */
+        /* Header */
         .main-header {
             background: linear-gradient(to bottom, #776998 0%, #97758d 100%);
             border-bottom: 2px solid #ccc;
-            height: 180px; 
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             overflow: hidden;
         }
-        
+
         .header-title {
             font-size: 3em;
             font-weight: bold;
             z-index: 5;
             color: #333;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.4); 
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
         }
 
-        /* Header Landscape Elements */
         .header-water-bg {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 25px;
-            background: #5d5d8c; 
+            background: #5d5d8c;
             z-index: 1;
         }
 
@@ -205,7 +220,7 @@
             right: 0;
             width: 250px;
             height: 60px;
-            background: #444; 
+            background: #444;
             border-radius: 100% 0 0 0;
             z-index: 2;
         }
@@ -220,7 +235,6 @@
             z-index: 20;
         }
 
-        /* The Tower */
         .lighthouse-tower {
             width: 30px;
             height: 60px;
@@ -239,7 +253,6 @@
             z-index: 1;
         }
 
-        /* The Lamp Room */
         .lighthouse-lamp {
             width: 40px;
             height: 25px;
@@ -248,35 +261,33 @@
             top: -5px;
             left: 0;
             border-radius: 4px;
-            z-index: 2; 
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: visible;
         }
-        
-        /* The Lightbulb (Source of ray) */
+
         .bulb {
             width: 15px;
             height: 15px;
             background: #ffffcc;
             border-radius: 50%;
             box-shadow: 0 0 10px #ffff00;
-            z-index: 2; 
+            z-index: 2;
         }
 
-        /* The Ray of Light */
         .light-ray {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 1200px; 
-            height: 400px; 
+            width: 1200px;
+            height: 400px;
             background: linear-gradient(90deg, rgba(255, 255, 220, 0.9), transparent);
-            transform-origin: 0% 50%; 
+            transform-origin: 0% 50%;
             clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
             transform: translate(0, -50%) rotate(180deg);
-            z-index: 1; 
+            z-index: 1;
             pointer-events: none;
             animation: ray-flicker 0.5s infinite alternate;
         }
@@ -292,7 +303,7 @@
             }
         }
 
-        /* --- Sidebar & Content (Unchanged) --- */
+        /* --- Sidebar & Content --- */
         .content-container {
             display: flex;
             min-height: calc(100vh - 180px);
@@ -330,6 +341,7 @@
         h2 { margin-bottom: 20px; }
         h3 { margin-bottom: 15px; color: #555; }
         p { margin-bottom: 15px; line-height: 1.6; }
+        
         .content-image {
             width: 100%;
             max-width: 400px;
@@ -394,135 +406,123 @@
         <div class="content-container">
             <nav class="sidebar">
                 <ul>
-                    <li><a href="#Domestic employments impacts of trade barriers" class="nav-link active">Domestic employments impacts of trade barriers</a></li>
-                    <li>
-                        <a href="#Trade and Competition" class="nav-link">Trade and Competition</a>
-                    </li>
-                    <li>
-                        <a href="#Trade and Specialization" class="nav-link">Trade and Specialization</a>
-                    </li>
-                    <li>
-                        <a href="#Trade Barriers Alternatives" class="nav-link">Trade Barriers Alternatives</a>
-                    </li>
-                    <li>
-                        <a href="#Game Theory of Trade Barriers" class="nav-link">Game Theory of Trade Barriers</a>
-                    </li>
-                    <li>
-                        <a href="#Reliance Problem" class="nav-link">Reliance Problem</a>
-                    </li>
-                    <li>
-                        <a href="#Conclusion" class="nav-link">Conclusion</a>
-                    </li>
-                    <li>
-                        <a href="#References" class="nav-link">References</a>
-                    </li>
+                    <li><a href="#domestic-impacts" class="nav-link active">Domestic employments impacts of trade barriers</a></li>
+                    <li><a href="#trade-competition" class="nav-link">Trade and Competition</a></li>
+                    <li><a href="#trade-specialization" class="nav-link">Trade and Specialization</a></li>
+                    <li><a href="#trade-alternatives" class="nav-link">Trade Barriers Alternatives</a></li>
+                    <li><a href="#game-theory" class="nav-link">Game Theory of Trade Barriers</a></li>
+                    <li><a href="#reliance-problem" class="nav-link">Reliance Problem</a></li>
+                    <li><a href="#conclusion" class="nav-link">Conclusion</a></li>
+                    <li><a href="#references" class="nav-link">References</a></li>
                 </ul>
             </nav>
 
             <main class="main-content">
-                <section id="Domestic employments impacts of trade barriers">
+                <section id="domestic-impacts">
                     <h2>Domestic impacts of trade barriers</h2>
                     <p>The debate over the impacts of tariffs, quotas, and other trade barriers 
-                        is becoming increasingly relevant in today's global economic enviroment 
+                        is becoming increasingly relevant in today's global economic environment 
                         as trade relationships are being questioned around the world.
-                         Notibly the current administration of world's leading economic
-                          power (United States of America) both announcing and treating more 
-                          protectionist policies and increased tariffs across the world. 
+                        Notably the current administration of world's leading economic
+                        power (United States of America) both announcing and treating more 
+                        protectionist policies and increased tariffs across the world. 
                         Proponents argue that increasing trade barriers is necessary to protect domestic industries and jobs. 
                         However, the data shows a different picture. Trade barriers like tariffs and quotas lead to less domestic competition as 
-                    domestic industries face less pressure to innovate harming job growth. While export barriers prevent domestic industries from accessing foreign markets,
-                     reducing their growth potential and preventing the creation of higher skill jobs and industries. Additionally, Alternatives to trade barriers like subsities to key domestic
-                     industries can often be more effective. While the worsening relations between countries can complicate trade policies and 
-                     instead of providing a better deal end up just producing worse outcomes.
-                    <div class="content-image"><img src = "fair_vs_free_trade.jpg" width="500" height="300"></div>
+                        domestic industries face less pressure to innovate harming job growth. While export barriers prevent domestic industries from accessing foreign markets,
+                        reducing their growth potential and preventing the creation of higher skill jobs and industries. Additionally, Alternatives to trade barriers like subsidies to key domestic
+                        industries can often be more effective. While the worsening relations between countries can complicate trade policies and 
+                        instead of providing a better deal end up just producing worse outcomes.</p>
+                    <div class="content-image"><img src="fair_vs_free_trade.jpg" alt="Fair vs Free Trade" width="500" height="300"></div>
                 </section>
 
-                <section id="Trade and Competition">
+                <section id="trade-competition">
                     <h2>Trade and Competition</h2>
                     <p>Almost all economic theories will agree on the positive impacts of competition especially for the context of employment.
-                         Highly competitive industries employ more workers and offer greater wages as companies have to fight to attract the best talent.
-                        This theory is also supportated by empirical evidence from various industries around the world. The world bank relased a report in 2020
-                    entitled "The Effects of Competition on Jobs and Economic Transformations", showed empirical evidence of this correlation. However, an argument could be made 
-                    that foriegn producer don't compete for the same workers as production is abrod so the benifits of competion doen't apply. But that misunderstands the cause that drives
-                employment, employment increase as competition forces domestic corporations invest more in their workforce and other ajacent industries in an effort to keep up. In 2003 Blanchard and 
-                Giavazzi created a model to show this effect of deregulation effects on employment. In it they discuss how increased competition forces firms to invest more in their workforce to stay competitive.
-                In there own words "increasing competition in the prod-
-                uct market, for a given number of firms. In the short run, firms facing more elastic demand decrease their markup,
-                leading in turn to both an increase in real wages, and a decrease in unem-
-                ployment."
-                </p>
+                        Highly competitive industries employ more workers and offer greater wages as companies have to fight to attract the best talent.
+                        This theory is also supported by empirical evidence from various industries around the world. The world bank released a report in 2020
+                        entitled "The Effects of Competition on Jobs and Economic Transformations", showed empirical evidence of this correlation. However, an argument could be made 
+                        that foreign producer don't compete for the same workers as production is abroad so the benefits of competition doesn't apply. But that misunderstands the cause that drives
+                        employment, employment increase as competition forces domestic corporations invest more in their workforce and other adjacent industries in an effort to keep up. In 2003 Blanchard and 
+                        Giavazzi created a model to show this effect of deregulation effects on employment. In it they discuss how increased competition forces firms to invest more in their workforce to stay competitive.
+                        In their own words "increasing competition in the prod-
+                        uct market, for a given number of firms. In the short run, firms facing more elastic demand decrease their markup,
+                        leading in turn to both an increase in real wages, and a decrease in unem-
+                        ployment."
+                    </p>
+                    <div><img src="venndor_marketplace.webp" alt="Vendor Marketplace" width="500" height="300"></div>
                 </section>
 
-                <section id="Trade and Specialization">
+                <section id="trade-specialization">
                     <h2>Trade and Specialization</h2>
-                    <p>Another benifit of free trade is the ability for a country to specialize in the production of goods and services that it can produce most efficiently.
+                    <p>Another benefit of free trade is the ability for a country to specialize in the production of goods and services that it can produce most efficiently.
                         Without export tariffs domestic enterprises can afford to produce more as international demand increases and thus increase it employment footprint.
                         This is supported by evidence, for example the Furceri and his collaborators (2018) shows that tarifs lead to higher unemployment in medium to long terms
                         using annual data from over 151 countries. They found, "tariff increases have adverse domestic macroeconomic and
-distributional consequences. We find empirically that tariff increases lead to declines of
-output and productivity in the medium term, as well as increases in unemployment and
-inequality." Another paper by Levchenko, Zhan (2011) demostrated that competitive advantage, a proxy for specialization, leads to higher welfare gain from trade.
- "We then compare the baseline to a counterfactual scenario in
-which each country’s sectoral productivities grow at the same average rate observed between the
-1960s and the 2000s, but its comparative advantage remains as it was in the 1960s... In the coun-
-terfactual of unchanged comparative advantage, however, trade volumes as a share of GDP are
-15% higher in the 2000s, implying that the rise in trade volumes over the past 5 decades would
-have been even higher had comparative advantage not weakened."
+                        distributional consequences. We find empirically that tariff increases lead to declines of
+                        output and productivity in the medium term, as well as increases in unemployment and
+                        inequality." Another paper by Levchenko and Zhang (2011) demonstrated that competitive advantage, a proxy for specialization, leads to higher welfare gain from trade.
+                        "We then compare the baseline to a counterfactual scenario in
+                        which each country’s sectoral productivities grow at the same average rate observed between the
+                        1960s and the 2000s, but its comparative advantage remains as it was in the 1960s... In the coun-
+                        terfactual of unchanged comparative advantage, however, trade volumes as a share of GDP are
+                        15% higher in the 2000s, implying that the rise in trade volumes over the past 5 decades would
+                        have been even higher had comparative advantage not weakened."</p>
+                    <div><img src="comparative_advantage.jpg" alt="Comparative Advantage" width="500" height="300"></div>
                 </section>
 
-
-                <section id="Trade Barriers Alternatives">
+                <section id="trade-alternatives">
                     <h2>Trade Barriers Alternatives</h2>
                     <p>Oftentimes, alternatives are ignored in these debates; however, alternatives like domestic subsidies can be more effective in supporting key industries without the negative impacts of trade barriers.
                         Subsidies as shown in the Chinese EV industry are able to prop up an industry until they are self sufficient without the negatives of trade barriers. An article in MIT Technology review entitled "How did China come to dominate the world of electric cars?"
                         directly attributes the success of the Chinese EV industry to government subsidies. 
-                    "From 2009 to 2022, the government poured over 200 billion RMB ($29 billion) into relevant subsidies and tax breaks. While the subsidy policy officially ended at the end of last year and was replaced by a more market-oriented system called “dual credits,” it had already had its intended effect: the more than 6 million EVs sold in China in 2022 accounted for over half of global EV sales."   </p>
-                </section>
-                    <div class="content-image"><img src = "government-subsidies-concept-icon-vector.jpg" width = "500" height = "300"></div>
+                        "From 2009 to 2022, the government poured over 200 billion RMB ($29 billion) into relevant subsidies and tax breaks. While the subsidy policy officially ended at the end of last year and was replaced by a more market-oriented system called “dual credits,” it had already had its intended effect: the more than 6 million EVs sold in China in 2022 accounted for over half of global EV sales."</p>
+                    <div class="content-image"><img src="government-subsidies-concept-icon-vector.jpg" alt="Government Subsidies" width="500" height="300"></div>
                 </section>
 
-                <section id="Game Theory of Trade Barriers">
+                <section id="game-theory">
                     <h2>Game Theory of Trade Barriers</h2>
                     <p>Proponents of increased trade barriers sometimes argue that they are great negotiating tools to achieve a better trade deal.
-                     However, Evidence has shown that the most common response is retaliation and escalation. As with Usa-Canada and Usa-europe trade fiasco the general outcome seems
-                     to be retaliation and escalation. And the costs of retaliation has been proven to be significant and detrimental to the welfare of the american populous.
-                     A paper entitled "Making America great again? The economic impacts of Liberation Day tariffs" showed that for the Liberation Day tariffs given retaliation the tariffs will result in 
-                     worse welfare outcomes. The cost of retaliation and escalation often outweighs any potential benefits in the long run from trade negotiation.
+                        However, Evidence has shown that the most common response is retaliation and escalation. As with Usa-Canada and Usa-europe trade fiasco the general outcome seems
+                        to be retaliation and escalation. And the costs of retaliation has been proven to be significant and detrimental to the welfare of the american populous.
+                        A paper entitled "Making America great again? The economic impacts of Liberation Day tariffs" showed that for the Liberation Day tariffs given retaliation the tariffs will result in 
+                        worse welfare outcomes. The cost of retaliation and escalation often outweighs any potential benefits in the long run from trade negotiation.
                     </p>
                     <img src="payoff_matrix.png" alt="Payoff Matrix">
                     <div style="height: 500px;"></div>
                 </section>
 
-                <section id="Reliance Problem">
+                <section id="reliance-problem">
                     <h3>Reliance Problem</h3>
-                    <p>The strongest counter argument is often the reliance problem, where government reliance on trade, leaves them susceptible to foriegn pressures.
+                    <p>The strongest counter argument is often the reliance problem, where government reliance on trade, leaves them susceptible to foreign pressures.
                         Many point to the relationship between europe and russia, where europe's reliance on russian energy has led to political complications as russia 
-                        uses energy as a political tool to attempt to buy influence to aid in its expaniton goals. Another instance is the existance of OPEC a collition of 
-                        oil producing nations that use their collective market power to influence oil prices around the world. These examples show the dangers of over reliance on foriegn trade.
+                        uses energy as a political tool to attempt to buy influence to aid in its expansion goals. Another instance is the existence of OPEC a coalition of 
+                        oil producing nations that use their collective market power to influence oil prices around the world. These examples show the dangers of over reliance on foreign trade.
                         However, these risks can be mitigated through diversification of trade partners. By engaging with multiple countries, a nation can reduce its vulnerability to any single
-                         foreign entity's political or economic pressures. In the same way, you as an individual don't need to worry about producing your own food, shelter, and clothing. 
-                         No retail chain is acting in your intrest yet because of competition and diversification of suppliers you are able to get the goods and services you need at a reasonable price.
-                         This prinicple applies at the national level as well.
-
+                        foreign entity's political or economic pressures. In the same way, you as an individual don't need to worry about producing your own food, shelter, and clothing. 
+                        No retail chain is acting in your interest yet because of competition and diversification of suppliers you are able to get the goods and services you need at a reasonable price.
+                        This principle applies at the national level as well.
                     </p>
                     <div style="height: 500px;"></div>
                 </section>
 
-                <section id="Conclusion">
+                <section id="conclusion">
                     <h2>Conclusion</h2>
                     <p>In conclusion, while trade barriers may seem appealing in the short term to protect domestic industries and jobs,
-                         the long-term consequences often lead to reduced competition, inefficiencies, and negative impacts on employment.
-                          Embracing free trade and exploring alternatives like subsidies can foster a more dynamic and prosperous economy.
+                        the long-term consequences often lead to reduced competition, inefficiencies, and negative impacts on employment.
+                        Embracing free trade and exploring alternatives like subsidies can foster a more dynamic and prosperous economy.
                     </p>
-
                 </section>
 
-                <section id="References">
+                <section id="references">
                     <h2>References</h2>
-                    <p>Blanchard, O., & Giavazzi, F. (2003). Macroeconomic Effects of Regulation and Deregulation in Goods and Labor Markets. The Quarterly Journal of Economics, 118(3), 879-907. https://www.nber.org/system/files/working_papers/w8120/w8120.pdf</p>
-                    <p>World Bank. (2020). The Effects of Competition on Jobs and Economic Transformations. World Bank Publications. https://documents1.worldbank.org/curated/en/360861602285878538/pdf/Equitable-Growth-Finance-and-Institutions-Insight-The-Effects-of-Competition-on-Jobs-and-Economic-Transformation.pdf</p>
-                    <p>Furceri, Hannan, Ostry, Rose (2018). NBER Working Paper Series Macroeconomic Consequences of Tariffs, https://www.nber.org/system/files/working_papers/w25402/w25402.pdf. Accessed 14 Nov. 2025.</p>
-                    <p>Levchenko, Zhan (2011). The Evolution Of Comparative Advantage Measurement and Welfare Implications. NEBR. https://www.aeaweb.org/articles?id=10.1257/jep.25.1.107</p>
+                    <p>Blanchard, Olivier, and Francesco Giavazzi. "Macroeconomic Effects of Regulation and Deregulation in Goods and Labor Markets." <em>The Quarterly Journal of Economics</em>, vol. 118, no. 3, 2003, pp. 879-907. <a href="https://www.nber.org/system/files/working_papers/w8120/w8120.pdf">https://www.nber.org/system/files/working_papers/w8120/w8120.pdf</a></p>
+                    
+                    <p>Furceri, Davide, et al. "Macroeconomic Consequences of Tariffs." <em>NBER Working Paper Series</em>, no. 25402, 2018. <a href="https://www.nber.org/system/files/working_papers/w25402/w25402.pdf">https://www.nber.org/system/files/working_papers/w25402/w25402.pdf</a>. Accessed 14 Nov. 2025.</p>
+
+                    <p>Levchenko, Andrei A., and Jing Zhang. "The Evolution of Comparative Advantage: Measurement and Welfare Implications." <em>Journal of Economic Perspectives</em>, vol. 25, no. 1, 2011. <a href="https://www.aeaweb.org/articles?id=10.1257/jep.25.1.107">https://www.aeaweb.org/articles?id=10.1257/jep.25.1.107</a></p>
+
+                    <p>World Bank. <em>The Effects of Competition on Jobs and Economic Transformations</em>. World Bank Publications, 2020. <a href="https://documents1.worldbank.org/curated/en/360861602285878538/pdf/Equitable-Growth-Finance-and-Institutions-Insight-The-Effects-of-Competition-on-Jobs-and-Economic-Transformation.pdf">https://documents1.worldbank.org/curated/en/360861602285878538/pdf/Equitable-Growth-Finance-and-Institutions-Insight-The-Effects-of-Competition-on-Jobs-and-Economic-Transformation.pdf</a></p>
+                </section>
             </main>
         </div>
     </div>
@@ -551,6 +551,7 @@ have been even higher had comparative advantage not weakened."
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
+                    // Adjusted offset for better trigger point
                     if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
                         currentSectionId = section.getAttribute('id');
                     }
@@ -561,6 +562,7 @@ have been even higher had comparative advantage not weakened."
                     const activeLink = document.querySelector(`.sidebar a[href="#${currentSectionId}"]`);
                     if (activeLink) {
                         activeLink.classList.add('active');
+                        // Handle nested links if you add them later
                         const parentItem = activeLink.closest('ul').closest('li');
                         if (parentItem) {
                             const parentLink = parentItem.querySelector('a.nav-link');
@@ -570,7 +572,9 @@ have been even higher had comparative advantage not weakened."
                         }
                     }
                 } else if (window.scrollY < 100) {
-                    document.querySelector('.sidebar a[href="#homepage"]').classList.add('active');
+                    // Safety check for top of page
+                    const homeLink = document.querySelector('.sidebar a[href="#domestic-impacts"]');
+                    if (homeLink) homeLink.classList.add('active');
                 }
             }
             window.addEventListener('scroll', updateActiveNav);
