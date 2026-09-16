@@ -251,18 +251,32 @@ class AutoencoderDemo {
       this.codebookDisplay.appendChild(chip);
     });
 
-    // 3. Render Autoregressive Decoded Text
+    // 3. Render Autoregressive Decoded Text / Exact Reconstructed Tokens
     this.reconstructDisplay.innerHTML = '';
-    const decodedWords = (data.decoded_text || '').split(/\s+/).filter(w => w.length > 0);
-    const displayWords = decodedWords.length > 0 ? decodedWords : validTokens.map(t => t.token);
-
-    displayWords.slice(0, validTokens.length).forEach((w, idx) => {
-      const span = document.createElement('span');
-      const isMatch = validTokens[idx] && (validTokens[idx].token.trim().toLowerCase() === w.trim().toLowerCase());
-      span.className = `ae-token ${isMatch ? 'token-exact' : 'token-diff'}`;
-      span.textContent = w;
-      this.reconstructDisplay.appendChild(span);
-    });
+    if (data.reconstructed_tokens && data.reconstructed_tokens.length > 0) {
+      const validRecons = data.reconstructed_tokens.filter(t => t.token !== '<pad>' && t.token !== '<s>' && t.token !== '</s>');
+      validRecons.forEach(item => {
+        const span = document.createElement('span');
+        span.className = `ae-token ${item.is_exact ? 'token-exact' : 'token-diff'}`;
+        span.textContent = item.token;
+        span.title = item.is_exact ? `Exact Match (${item.token})` : `Predicted: "${item.token}" (Expected: "${item.expected}")`;
+        this.reconstructDisplay.appendChild(span);
+      });
+    } else {
+      // Fallback: accurately match using lossless_metrics error positions
+      const errorMap = {};
+      (data.lossless_metrics?.errors || []).forEach(e => {
+        errorMap[e.pos] = e.predicted_token;
+      });
+      validTokens.forEach((item) => {
+        const isErr = (item.pos !== undefined && item.pos in errorMap);
+        const span = document.createElement('span');
+        span.className = `ae-token ${isErr ? 'token-diff' : 'token-exact'}`;
+        span.textContent = isErr ? errorMap[item.pos] : item.token;
+        span.title = isErr ? `Predicted: "${errorMap[item.pos]}" (Expected: "${item.token}")` : `Exact Match (${item.token})`;
+        this.reconstructDisplay.appendChild(span);
+      });
+    }
 
     // 4. Metrics
     const metrics = data.lossless_metrics || {};
