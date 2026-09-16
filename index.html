@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fengtao Wang | Personal Website & Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Personal website of Fengtao Wang - Mathematics & Economics at University of Waterloo. Deep Learning, Discrete Autoencoders, Game Engines, and Systems.">
+  <meta name="keywords" content="Fengtao Wang, asdfaqer, Waterloo Mathematics, Deep Learning, 4K Downscroller, PyTorch, Discrete Autoencoder">
+  <meta name="author" content="Fengtao Wang">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fengtao Wang | Personal Website & Portfolio">
+  <meta property="og:description" content="Mathematics & Economics at UWaterloo. Research in Discrete Bottlenecks, Chess CNN, and 4K Downscroller Rhythm Game.">
+  <meta property="og:type" content="website">
+  
+  <!-- Modern Typography Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Glass Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <a href="#hero" class="nav-brand">
+      <div class="nav-logo-badge">FW</div>
+      <span>Fengtao Wang</span>
+    </a>
+    
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#projects-section" class="nav-link">Projects</a></li>
+        <li><a href="#arcade-section" class="nav-link">4K Rhythm Game</a></li>
+        <li><a href="#resume-section" class="nav-link">Experience</a></li>
+        <li><a href="#resume-section" class="nav-link">Education</a></li>
+      </ul>
+    </nav>
+    
+    <div class="nav-actions">
+      <a href="Fengtao_Wang_Resume.pdf" class="btn btn-secondary open-resume-modal" id="navResumeBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>Resume</span>
+      </a>
+      
+      <a href="https://github.com/asdfaqer" target="_blank" rel="noopener noreferrer" class="btn-icon-round" title="GitHub Profile">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: Big Name in Middle + Down Chevron -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-glow-sphere-1"></div>
+      <div class="hero-glow-sphere-2"></div>
+      
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="hero-tag-pulse"></span>
+          University of Waterloo &bull; Mathematics & Economics
+        </div>
+        
+        <!-- Big Name in Middle -->
+        <h1 class="hero-name">Fengtao Wang</h1>
+        
+        <p class="hero-title">
+          Building <span>Discrete Autoencoders</span>, <span>Deep Learning Models</span>, and <span>Interactive Systems</span>
+        </p>
+        
+        <p class="hero-subtext">
+          Passionate about mathematical reasoning bottlenecks, neural search heuristics, game engines, and low-latency algorithmic design. Waterloo President's Scholarship of Distinction recipient.
+        </p>
+        
+        <div class="hero-badges">
+          <span class="badge">PyTorch</span>
+          <span class="badge">Python</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">C++</span>
+          <span class="badge">Game Engines</span>
+          <span class="badge">4K Downscroller</span>
+          <span class="badge">Transformer Decoders</span>
+        </div>
+        
+        <div class="hero-cta">
+          <a href="#projects-section" class="btn btn-primary">
+            <span>Explore Projects</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          
+          <a href="#arcade-section" class="btn btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Play 4K Rhythm Game</span>
+          </a>
+
+          <a href="Fengtao_Wang_Resume.pdf" class="btn btn-secondary open-resume-modal">
+            <span>View Resume (PDF)</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Chevron Pointing Down -->
+      <a href="#projects-section" class="hero-scroll-wrapper" id="scrollIndicator" title="Scroll down to view projects">
+        <div class="chevron-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <span class="hero-scroll-text">Scroll Down</span>
+      </a>
+    </section>
+
+    <!-- SCROLL-TRIGGERED PROJECTS CAROUSEL -->
+    <section class="section" id="projects-section">
+      <div class="section-header">
+        <span class="section-tag">Portfolio Showcase</span>
+        <h2 class="section-title">Featured <span>GitHub Projects</span></h2>
+        <p class="section-subtitle">
+          Explore research implementations in neural autoencoders, 4K game engine design, deep chess nets, and multimodal audio systems.
+        </p>
+      </div>
+
+      <div class="carousel-outer">
+        <!-- Navigation Buttons -->
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous Slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next Slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Carousel Track Container -->
+        <div class="carousel-container">
+          <div class="carousel-track" id="carouselTrack">
+
+            <!-- Card 1: Discrete Autoencoder -->
+            <div class="project-card">
+              <div class="project-card-banner bg-autoencoder">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">AI & Deep Learning</span>
+                  <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">Discrete Autoencoder for Math Reasoning</h3>
+                <p class="project-card-desc">
+                  Two-half architecture: an encoder mapping complex mathematical reasoning chains into discrete bottleneck codebooks, paired with an autoregressive Transformer decoder for exact reconstruction.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                  <span>37% higher lossless compression ratio than standard gzip</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">PyTorch</span>
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">Transformers</span>
+                  <span class="project-tag">Arithmetic Coding</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: 4K Downscroller Rhythm Game -->
+            <div class="project-card">
+              <div class="project-card-banner bg-rhythmgame">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Game Engine & Systems</span>
+                  <a href="https://github.com/asdfaqer/4k-downscroller" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">4K Downscroller Rhythm Game</h3>
+                <p class="project-card-desc">
+                  Modern 4-key rhythm game engine in Pygame-ce featuring beatmapping editor, dynamic snapping, hold notes with translucent bodies, real-time accuracy scoring, and confetti victory.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                  <span>Features interactive browser engine below!</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">Pygame-ce</span>
+                  <span class="project-tag">Audio Waveform</span>
+                  <span class="project-tag">HTML5 Arcade</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="#arcade-section" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    Play In-Browser
+                  </a>
+                  <a href="https://github.com/asdfaqer/4k-downscroller" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Chess CNN -->
+            <div class="project-card">
+              <div class="project-card-banner bg-chess">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Deep Learning</span>
+                  <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">Chess CNN (Deep Learning)</h3>
+                <p class="project-card-desc">
+                  Architected a convolutional network utilizing Residual and Squeeze-and-Excitation (SE) blocks trained on over 2 million positions, achieving 40+% Stockfish move accuracy and ~1500 Elo without search.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>~1500 Elo zero-search intuition + Web suite</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">SE-ResNet</span>
+                  <span class="project-tag">PyTorch</span>
+                  <span class="project-tag">JS/HTML Suite</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: TroupeTTS -->
+            <div class="project-card">
+              <div class="project-card-banner bg-troupe">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Multimodal AI Audio</span>
+                  <a href="https://github.com/FengchiW/Troupe" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">TroupeTTS (AI Audio Pipeline)</h3>
+                <p class="project-card-desc">
+                  Engineered an end-to-end pipeline converting text and images into natural diarized multi-speaker audio using Gemini and Inworld APIs, with automated speaker labeling.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                  <span>Live at troupetts.com</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">TypeScript</span>
+                  <span class="project-tag">Node.js</span>
+                  <span class="project-tag">Gemini API</span>
+                  <span class="project-tag">Inworld API</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="https://troupetts.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    Live Site
+                  </a>
+                  <a href="https://github.com/FengchiW/Troupe" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Interactive Mind Map -->
+            <div class="project-card">
+              <div class="project-card-banner bg-mindmap">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Data Visualization</span>
+                  <a href="https://github.com/asdfaqer/mindmap_project" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">Interactive Mind Map</h3>
+                <p class="project-card-desc">
+                  Dynamic mind mapping & hierarchical visualization tool built with vanilla JavaScript. Includes interactive side-panel technical document inspector for client presentations.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  <span>Dynamic Hierarchical Node Graph</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">Vanilla JS</span>
+                  <span class="project-tag">HTML5 Canvas</span>
+                  <span class="project-tag">Data Visualization</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="https://github.com/asdfaqer/mindmap_project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 6: Crazyhouse Bots -->
+            <div class="project-card">
+              <div class="project-card-banner bg-crazyhouse">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Algorithmic Search</span>
+                  <a href="https://github.com/asdfaqer/Crazyhouse_bots" target="_blank" rel="noopener noreferrer" class="project-github-icon" title="View Source on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">Crazyhouse Bots</h3>
+                <p class="project-card-desc">
+                  Interactive Pygame environment with piece drop logic and valid move highlighting. Implemented Minimax with alpha-beta pruning and Monte Carlo Tree Search (MCTS) for tactical play.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                  <span>Minimax &alpha;-&beta; Pruning + MCTS</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">Pygame</span>
+                  <span class="project-tag">Game AI</span>
+                  <span class="project-tag">MCTS</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="https://github.com/asdfaqer/Crazyhouse_bots" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    GitHub Repo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7: LiveSens Visualization Suite -->
+            <div class="project-card">
+              <div class="project-card-banner bg-livesens">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                  <span class="project-category-pill">Industrial Research</span>
+                  <span class="project-github-icon" title="Commercialized Data Framework">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                  </span>
+                </div>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-card-title">LiveSens Visualization Suite</h3>
+                <p class="project-card-desc">
+                  Synthesized environmental trends across multi-regional sensor hardware (Gaia, Envea, MetOne). Built a vanilla JS visualization suite formulating strategic data monetization framework.
+                </p>
+                <div class="project-card-stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  <span>WeAccelerate Data Driven Solutions</span>
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag">Vanilla JS</span>
+                  <span class="project-tag">Telemetry Analytics</span>
+                  <span class="project-tag">Hardware Specs</span>
+                </div>
+                <div class="project-card-actions">
+                  <a href="#resume-section" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    View in Experience
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators" id="carouselIndicators"></div>
+      </div>
+    </section>
+
+    <!-- 4K DOWNSCROLLER PLAYABLE ARCADE SECTION -->
+    <section class="section arcade-section" id="arcade-section">
+      <div class="section-header">
+        <span class="section-tag">Interactive Game Engine</span>
+        <h2 class="section-title">4K Downscroller <span>Arcade</span></h2>
+        <p class="section-subtitle">
+          Play a real-time web port of the 4-lane downscroller rhythm engine built with responsive key controls, synth beat generation, and accuracy tracking.
+        </p>
+      </div>
+
+      <div class="arcade-card">
+        <div class="arcade-layout">
+          <!-- Game Canvas Viewport -->
+          <div class="game-viewport-wrapper">
+            <div class="game-canvas-container">
+              <canvas id="gameCanvas"></canvas>
+              
+              <!-- Start / Game Over Overlay -->
+              <div class="game-overlay-screen" id="gameOverlay">
+                <h3 class="game-overlay-title" id="gameOverlayTitle">4K <span>DOWNSCROLLER</span></h3>
+                <p class="game-overlay-desc" id="gameOverlayDesc">
+                  Hit the falling notes as they reach the judgment line at the bottom.
+                </p>
+                
+                <div class="game-key-guides">
+                  <div class="key-cap">D <span>Lane 1</span></div>
+                  <div class="key-cap">F <span>Lane 2</span></div>
+                  <div class="key-cap">J <span>Lane 3</span></div>
+                  <div class="key-cap">K <span>Lane 4</span></div>
+                </div>
+
+                <button class="btn btn-primary" id="gameStartBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <span>Start Game</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Mobile Touch Controls -->
+            <div class="mobile-touch-controls">
+              <button class="mobile-lane-btn" data-lane="0">D</button>
+              <button class="mobile-lane-btn" data-lane="1">F</button>
+              <button class="mobile-lane-btn" data-lane="2">J</button>
+              <button class="mobile-lane-btn" data-lane="3">K</button>
+            </div>
+          </div>
+
+          <!-- Arcade Controls & Stats Sidebar -->
+          <div class="arcade-sidebar">
+            <div class="arcade-info-box">
+              <h3>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                Engine Specs
+              </h3>
+              <p>
+                Based on Fengtao's Python &amp; Pygame-ce engine. Supports sub-frame audio synchronization, dynamic grid snapping, hold note rendering, and animated celebratory confetti.
+              </p>
+              <a href="https://github.com/asdfaqer/4k-downscroller" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>View Python Engine Code</span>
+              </a>
+            </div>
+
+            <div class="arcade-info-box">
+              <h3>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Live Metrics
+              </h3>
+              <div class="arcade-stats-grid">
+                <div class="stat-item">
+                  <div class="stat-label">Score</div>
+                  <div class="stat-value" id="gameScore">0</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">Combo</div>
+                  <div class="stat-value" id="gameCombo">0</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">Accuracy</div>
+                  <div class="stat-value" id="gameAcc">100%</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">Key Layout</div>
+                  <div class="stat-value" style="font-size: 1rem;">D F J K</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME, EXPERIENCE & EDUCATION SECTION -->
+    <section class="section resume-section" id="resume-section">
+      <div class="section-header">
+        <span class="section-tag">Academic & Professional Background</span>
+        <h2 class="section-title">Resume &amp; <span>Credentials</span></h2>
+        <p class="section-subtitle">
+          University of Waterloo candidate in Mathematical Finance and Economics. Proven record in algorithmic systems and mathematical analysis.
+        </p>
+      </div>
+
+      <div class="resume-header-actions">
+        <a href="Fengtao_Wang_Resume.pdf" download="Fengtao_Wang_Resume.pdf" class="btn btn-primary" id="downloadResumeBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Resume (PDF)</span>
+        </a>
+
+        <a href="Fengtao_Wang_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary open-resume-modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <span>Quick Preview</span>
+        </a>
+      </div>
+
+      <div class="resume-grid">
+        <!-- Experience & Education Column -->
+        <div class="resume-col">
+          <h3 class="resume-col-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            Experience &amp; Education
+          </h3>
+
+          <div class="timeline">
+            <!-- Education -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-period">Sept 2024 &ndash; June 2029</div>
+                <h4 class="timeline-role">Candidate of Bachelor of Mathematics</h4>
+                <div class="timeline-org">University of Waterloo</div>
+                <ul class="timeline-bullets">
+                  <li><strong>Specialization:</strong> Mathematical Finance and Economics.</li>
+                  <li><strong>Relevant Coursework:</strong> Computational Mathematics, Optimization, Differential Equations, Linear Algebra 1 &amp; 2, Calculus 1&ndash;3, Probability &amp; Statistics, Micro/Macroeconomic Theory.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Work 1: LiveSens -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-period">June 2025 &ndash; Aug 2025</div>
+                <h4 class="timeline-role">Researcher &ndash; LiveSens</h4>
+                <div class="timeline-org">WeAccelerate (Data Driven Solutions)</div>
+                <ul class="timeline-bullets">
+                  <li>Analyzed multi-regional air quality datasets and sensor hardware specifications from market leaders (Gaia, Envea, MetOne Instruments) to synthesize environmental market trends.</li>
+                  <li>Built a vanilla JS visualization suite to explore air quality data use-cases, forming the strategic framework for data monetization and commercialization of LiveSens datasets.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Work 2: University Economics Tutor -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-period">Sept 2025 &ndash; Dec 2025</div>
+                <h4 class="timeline-role">University Economics Tutor</h4>
+                <div class="timeline-org">University of Waterloo</div>
+                <ul class="timeline-bullets">
+                  <li>Guided student athletes through difficult economics concepts including Indifference curves, Marginal costs, and Market Equilibrium.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills & Awards Column -->
+        <div class="resume-col">
+          <h3 class="resume-col-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            Skills &amp; Honors
+          </h3>
+
+          <!-- Technical Skills -->
+          <div class="skills-block">
+            <h4>Programming Languages</h4>
+            <div class="skill-chips">
+              <span class="skill-chip">C++</span>
+              <span class="skill-chip">C</span>
+              <span class="skill-chip">C#</span>
+              <span class="skill-chip">Python</span>
+              <span class="skill-chip">Java</span>
+              <span class="skill-chip">JavaScript</span>
+              <span class="skill-chip">HTML/CSS</span>
+              <span class="skill-chip">SQL</span>
+              <span class="skill-chip">R</span>
+              <span class="skill-chip">Processing</span>
+            </div>
+          </div>
+
+          <div class="skills-block">
+            <h4>Frameworks &amp; Tools</h4>
+            <div class="skill-chips">
+              <span class="skill-chip">PyTorch</span>
+              <span class="skill-chip">NumPy</span>
+              <span class="skill-chip">Git / GitHub</span>
+              <span class="skill-chip">Linux &amp; Bash</span>
+              <span class="skill-chip">Pygame-ce</span>
+              <span class="skill-chip">Node.js</span>
+              <span class="skill-chip">Excel (Data Analysis)</span>
+            </div>
+          </div>
+
+          <!-- Awards -->
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-icon">&#9733;</div>
+              <div>
+                <div class="award-title">UWaterloo President's Scholarship of Distinction</div>
+                <div class="award-desc">Awarded for high academic achievement upon entrance to the University of Waterloo.</div>
+              </div>
+            </div>
+
+            <div class="award-item">
+              <div class="award-icon">&#127941;</div>
+              <div>
+                <div class="award-title">Euclid Mathematics Contest: Certificate of Distinction</div>
+                <div class="award-desc">Ranked in the top 25% nationally in CEMC prestigious mathematics competition.</div>
+              </div>
+            </div>
+
+            <div class="award-item">
+              <div class="award-icon">&#128220;</div>
+              <div>
+                <div class="award-title">Fermat &amp; Hypatia Mathematics Contests</div>
+                <div class="award-desc">Honour Roll recognition for outstanding high standing.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PDF Resume Quick Preview Modal -->
+  <div class="modal-backdrop" id="resumeModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title">Fengtao Wang &mdash; Resume</span>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <a href="Fengtao_Wang_Resume.pdf" download="Fengtao_Wang_Resume.pdf" class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">
+            Download PDF
+          </a>
+          <button class="modal-close-btn" id="closeResumeModal" aria-label="Close modal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe src="Fengtao_Wang_Resume.pdf#view=FitH" title="Fengtao Wang Resume PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modern Dark Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">Fengtao Wang</div>
+      <p style="color: var(--text-secondary); max-width: 500px; font-size: 0.95rem;">
+        Mathematical Finance &amp; Economics &bull; University of Waterloo &bull; Waterloo, ON
+      </p>
+
+      <div class="footer-socials">
+        <a href="https://github.com/asdfaqer" target="_blank" rel="noopener noreferrer" class="btn-icon-round" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/fengtao-wang" target="_blank" rel="noopener noreferrer" class="btn-icon-round" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28M7.85 18.5V10.13H5.06v8.37h2.79z"/></svg>
+        </a>
+        <a href="mailto:ccbdchcc@gmail.com" class="btn-icon-round" title="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+      </div>
+
+      <p class="footer-copy">
+        &copy; 2026 Fengtao Wang. Hosted on GitHub Pages via <a href="https://github.com/asdfaqer/asdfaqer.github.io" target="_blank" style="color: var(--color-aqua); text-decoration: none;">asdfaqer.github.io</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
