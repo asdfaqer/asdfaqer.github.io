@@ -20,6 +20,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Chess & Interactive Demo Dependencies -->
+  <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,7 +40,7 @@
     <nav>
       <ul class="nav-links">
         <li><a href="#projects-section" class="nav-link">Projects</a></li>
-        <li><a href="#arcade-section" class="nav-link">4K Rhythm Game</a></li>
+        <li><a href="#demos-section" class="nav-link">Interactive Demos</a></li>
         <li><a href="#resume-section" class="nav-link">Experience</a></li>
         <li><a href="#resume-section" class="nav-link">Education</a></li>
       </ul>
@@ -84,11 +90,11 @@
             </svg>
           </a>
           
-          <a href="#arcade-section" class="btn btn-outline">
+          <a href="#demos-section" class="btn btn-outline">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
-            <span>Play 4K Rhythm Game</span>
+            <span>Interactive Demos</span>
           </a>
 
           <a href="Fengtao_Wang_Resume.pdf" class="btn btn-secondary open-resume-modal">
@@ -385,94 +391,163 @@
       </div>
     </section>
 
-    <!-- 4K DOWNSCROLLER PLAYABLE ARCADE SECTION -->
-    <section class="section arcade-section" id="arcade-section">
+    <!-- INTERACTIVE TECHNICAL DEMOS SECTION -->
+    <section class="section demos-section" id="demos-section">
       <div class="section-header">
-        <span class="section-tag">Interactive Game Engine</span>
-        <h2 class="section-title">4K Downscroller <span>Arcade</span></h2>
+        <span class="section-tag">Interactive Research &amp; Deep Learning</span>
+        <h2 class="section-title">Live Technical <span>Demos</span></h2>
         <p class="section-subtitle">
-          Play a real-time web port of the 4-lane downscroller rhythm engine built with responsive key controls, synth beat generation, and accuracy tracking.
+          Real-time interactive demonstrations of the Discrete Autoencoder reasoning trace compressor and the Chess CNN policy engine.
         </p>
       </div>
 
-      <div class="arcade-card">
-        <div class="arcade-layout">
-          <!-- Game Canvas Viewport -->
-          <div class="game-viewport-wrapper">
-            <div class="game-canvas-container">
-              <canvas id="gameCanvas"></canvas>
-              
-              <!-- Start / Game Over Overlay -->
-              <div class="game-overlay-screen" id="gameOverlay">
-                <h3 class="game-overlay-title" id="gameOverlayTitle">4K <span>DOWNSCROLLER</span></h3>
-                <p class="game-overlay-desc" id="gameOverlayDesc">
-                  Hit the falling notes as they reach the judgment line at the bottom.
-                </p>
-                
-                <div class="game-key-guides">
-                  <div class="key-cap">D <span>Lane 1</span></div>
-                  <div class="key-cap">F <span>Lane 2</span></div>
-                  <div class="key-cap">J <span>Lane 3</span></div>
-                  <div class="key-cap">K <span>Lane 4</span></div>
+      <!-- DEMO 1: Discrete Autoencoder for Math Reasoning (visualize.py) -->
+      <div class="demo-box" id="autoencoder-demo">
+        <div class="demo-header-bar">
+          <div class="demo-title-group">
+            <h3>Discrete Autoencoder &mdash; Reasoning Trace Visualizer</h3>
+            <p>Maps mathematical reasoning steps into discrete codebooks for lossless arithmetic compression (+37% higher compression than gzip).</p>
+          </div>
+          <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem;">
+            <span>GitHub Repository</span>
+          </a>
+        </div>
+
+        <!-- Controls Grid -->
+        <div class="ae-controls-grid">
+          <div class="ae-control-item">
+            <label for="ae-sample-select">Reasoning Trace Prompt</label>
+            <select id="ae-sample-select" class="ae-select">
+              <option value="0" selected>Quadratic Factoring Reasoning</option>
+              <option value="1">Cauchy Convergence Criterion</option>
+              <option value="2">Modular Arithmetic Proof</option>
+              <option value="3">Discrete Codebook Compression</option>
+              <option value="custom">Custom Reasoning Prompt...</option>
+            </select>
+          </div>
+
+          <div class="ae-control-item">
+            <label for="ae-acc-slider">
+              <span>Target Accuracy</span>
+              <span id="ae-acc-val" style="color: var(--color-aqua);">95%</span>
+            </label>
+            <input type="range" id="ae-acc-slider" class="ae-slider" min="70" max="100" value="95">
+          </div>
+
+          <div class="ae-control-item">
+            <label for="ae-drop-slider">
+              <span>Drop K Latents</span>
+              <span id="ae-drop-val" style="color: var(--color-aqua);">10</span>
+            </label>
+            <input type="range" id="ae-drop-slider" class="ae-slider" min="0" max="32" value="10">
+          </div>
+        </div>
+
+        <!-- Custom Input Box (Initially Hidden) -->
+        <textarea id="ae-custom-text" class="ae-input-text" rows="3" style="display: none; margin-bottom: 1.5rem;" placeholder="Type custom mathematical reasoning text to tokenize and compress..."></textarea>
+
+        <!-- Token Gating Ribbon (visualize.py gate scores) -->
+        <div class="ae-panel-label">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          Input Reasoning Tokens &amp; Gating Heatmap (Green = Latent Bottleneck, Gray = Dropped)
+        </div>
+        <div class="ae-token-ribbon" id="ae-token-display"></div>
+
+        <!-- Codebook Latent Indices -->
+        <div class="ae-panel-label">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Quantized Discrete Codebook Indices (Codebook Size = 4096)
+        </div>
+        <div class="ae-codebook-chips" id="ae-codebook-display"></div>
+
+        <!-- Reconstructed Tokens -->
+        <div class="ae-panel-label">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Autoregressive Transformer Decoder Reconstruction
+        </div>
+        <div class="ae-token-ribbon" id="ae-reconstruct-display" style="min-height: 60px;"></div>
+
+        <!-- Lossless Storage Metrics Grid -->
+        <div class="ae-metrics-grid">
+          <div class="ae-metric-card">
+            <div class="ae-metric-label">Raw Storage</div>
+            <div class="ae-metric-val" id="ae-stat-orig-bits">0 b</div>
+          </div>
+          <div class="ae-metric-card">
+            <div class="ae-metric-label">Standard Gzip</div>
+            <div class="ae-metric-val" id="ae-stat-gzip-bits">0 b</div>
+          </div>
+          <div class="ae-metric-card">
+            <div class="ae-metric-label">Autoencoder + Arithmetic</div>
+            <div class="ae-metric-val" id="ae-stat-comp-bits">0 b</div>
+          </div>
+          <div class="ae-metric-card">
+            <div class="ae-metric-label">Compression Gain</div>
+            <div class="ae-metric-val" id="ae-stat-ratio" style="font-size: 1.1rem; color: var(--color-aqua);">37% &gt; gzip</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMO 2: Chess CNN Deep Learning Suite (web testing/) -->
+      <div class="demo-box" id="chess-demo">
+        <div class="demo-header-bar">
+          <div class="demo-title-group">
+            <h3>Chess CNN &mdash; Deep Learning Web Suite</h3>
+            <p>Residual / Squeeze-and-Excitation network trained on 2M+ positions (~1500 Elo without search). Play as White against the CNN engine.</p>
+          </div>
+          <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem;">
+            <span>GitHub Repository</span>
+          </a>
+        </div>
+
+        <div class="chess-demo-layout">
+          <!-- Chessboard -->
+          <div>
+            <div id="chessBoardContainer"></div>
+          </div>
+
+          <!-- Controls & CNN Move Probability Distribution -->
+          <div class="chess-sidebar">
+            <div class="chess-controls-box">
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+                <div style="flex: 1; min-width: 140px;">
+                  <label for="chessAiMode" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                    AI Engine Mode
+                  </label>
+                  <select id="chessAiMode" class="ae-select">
+                    <option value="fast" selected>Fast AI (Policy Net)</option>
+                    <option value="mcts">Strong AI (MCTS Search)</option>
+                  </select>
                 </div>
 
-                <button class="btn btn-primary" id="gameStartBtn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                  <span>Start Game</span>
+                <div style="flex: 1; min-width: 120px;">
+                  <label for="chessTimeLimit" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                    Think Time
+                  </label>
+                  <select id="chessTimeLimit" class="ae-select">
+                    <option value="1" selected>1 second</option>
+                    <option value="3">3 seconds</option>
+                    <option value="5">5 seconds</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary);">
+                  Status: <span id="chessStatus" style="color: var(--color-aqua);">White to move</span>
+                </div>
+                <button class="btn btn-secondary" id="chessResetBtn" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                  Reset Board
                 </button>
               </div>
             </div>
 
-            <!-- Mobile Touch Controls -->
-            <div class="mobile-touch-controls">
-              <button class="mobile-lane-btn" data-lane="0">D</button>
-              <button class="mobile-lane-btn" data-lane="1">F</button>
-              <button class="mobile-lane-btn" data-lane="2">J</button>
-              <button class="mobile-lane-btn" data-lane="3">K</button>
-            </div>
-          </div>
-
-          <!-- Arcade Controls & Stats Sidebar -->
-          <div class="arcade-sidebar">
-            <div class="arcade-info-box">
-              <h3>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                Engine Specs
-              </h3>
-              <p>
-                Based on Fengtao's Python &amp; Pygame-ce engine. Supports sub-frame audio synchronization, dynamic grid snapping, hold note rendering, and animated celebratory confetti.
-              </p>
-              <a href="https://github.com/asdfaqer/4k-downscroller" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%; justify-content: center;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                <span>View Python Engine Code</span>
-              </a>
-            </div>
-
-            <div class="arcade-info-box">
-              <h3>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                Live Metrics
-              </h3>
-              <div class="arcade-stats-grid">
-                <div class="stat-item">
-                  <div class="stat-label">Score</div>
-                  <div class="stat-value" id="gameScore">0</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-label">Combo</div>
-                  <div class="stat-value" id="gameCombo">0</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-label">Accuracy</div>
-                  <div class="stat-value" id="gameAcc">100%</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-label">Key Layout</div>
-                  <div class="stat-value" style="font-size: 1rem;">D F J K</div>
-                </div>
+            <!-- CNN Policy Distribution -->
+            <div class="chess-controls-box">
+              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.6rem;">
+                CNN Policy Candidate Move Probabilities
               </div>
+              <div class="chess-policy-list" id="chessPolicyList"></div>
             </div>
           </div>
         </div>
@@ -597,32 +672,6 @@
             </div>
           </div>
 
-          <!-- Awards -->
-          <div class="awards-list">
-            <div class="award-item">
-              <div class="award-icon">&#9733;</div>
-              <div>
-                <div class="award-title">UWaterloo President's Scholarship of Distinction</div>
-                <div class="award-desc">Awarded for high academic achievement upon entrance to the University of Waterloo.</div>
-              </div>
-            </div>
-
-            <div class="award-item">
-              <div class="award-icon">&#127941;</div>
-              <div>
-                <div class="award-title">Euclid Mathematics Contest: Certificate of Distinction</div>
-                <div class="award-desc">Ranked in the top 25% nationally in CEMC prestigious mathematics competition.</div>
-              </div>
-            </div>
-
-            <div class="award-item">
-              <div class="award-icon">&#128220;</div>
-              <div>
-                <div class="award-title">Fermat &amp; Hypatia Mathematics Contests</div>
-                <div class="award-desc">Honour Roll recognition for outstanding high standing.</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -673,7 +722,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="game.js"></script>
+  <script src="demos.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

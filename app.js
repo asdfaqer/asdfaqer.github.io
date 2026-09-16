@@ -173,9 +173,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-  // 5. Initialize Rhythm Game
-  if (window.initRhythmGame) {
-    window.initRhythmGame();
-  }
 });
