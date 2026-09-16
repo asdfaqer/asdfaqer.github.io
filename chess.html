@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess CNN Deep Learning Suite | Fengtao Wang</title>
+  <meta name="description" content="Interactive browser suite for Chess CNN policy network trained on 2M+ positions. Play against the deep convolutional network with real-time candidate move distribution.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Chessboard CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .standalone-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .standalone-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 7, 20, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .standalone-header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    .back-link:hover {
+      color: var(--color-aqua);
+      transform: translateX(-3px);
+    }
+    .standalone-main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      width: 100%;
+    }
+    .page-title-banner {
+      margin-bottom: 2.5rem;
+    }
+    .page-title-banner h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+    .page-title-banner p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      line-height: 1.6;
+    }
+    .tech-specs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .spec-item {
+      background: rgba(19, 14, 34, 0.6);
+      border: 1px solid rgba(62, 62, 117, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+    }
+    .spec-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .spec-val {
+      font-size: 1.1rem;
+      color: #ffffff;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body class="standalone-page">
+
+  <!-- Header -->
+  <header class="standalone-header">
+    <div class="standalone-header-content">
+      <a href="index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span class="badge" style="background: rgba(69, 169, 169, 0.15); color: var(--color-aqua); border: 1px solid rgba(152, 232, 222, 0.3); font-weight: 700; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem;">
+          CNN Engine: Active
+        </span>
+
+        <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub Repo</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="standalone-main">
+    <div class="page-title-banner">
+      <span class="section-tag">Deep Learning &bull; Computer Vision &bull; Game AI</span>
+      <h1>Chess CNN &mdash; Deep Learning Web Suite</h1>
+      <p>
+        Play against the Deep Convolutional Neural Network with Residual / Squeeze-and-Excitation blocks trained on 2,000,000+ board positions. Inspect live candidate move probabilities predicted by the CNN policy head.
+      </p>
+    </div>
+
+    <!-- Chess Demo Box -->
+    <div class="demo-box" id="chess-demo" style="margin-bottom: 0;">
+      <div class="chess-demo-layout">
+        <!-- Chessboard -->
+        <div>
+          <div id="chessBoardContainer"></div>
+        </div>
+
+        <!-- Controls & CNN Move Probability Distribution -->
+        <div class="chess-sidebar">
+          <div class="chess-controls-box">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+              <div style="flex: 1; min-width: 140px;">
+                <label for="chessAiMode" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                  AI Engine Mode
+                </label>
+                <select id="chessAiMode" class="ae-select">
+                  <option value="fast" selected>Fast AI (Policy Net)</option>
+                  <option value="mcts">Strong AI (MCTS Search)</option>
+                </select>
+              </div>
+
+              <div style="flex: 1; min-width: 120px;">
+                <label for="chessTimeLimit" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                  Think Time
+                </label>
+                <select id="chessTimeLimit" class="ae-select">
+                  <option value="1" selected>1 second</option>
+                  <option value="3">3 seconds</option>
+                  <option value="5">5 seconds</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+              <div style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary);">
+                Status: <span id="chessStatus" style="color: var(--color-aqua);">White to move</span>
+              </div>
+              <button class="btn btn-secondary" id="chessResetBtn" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                Reset Board
+              </button>
+            </div>
+          </div>
+
+          <!-- CNN Policy Distribution -->
+          <div class="chess-controls-box">
+            <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.6rem;">
+              CNN Policy Candidate Move Probabilities
+            </div>
+            <div class="chess-policy-list" id="chessPolicyList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Specs Card -->
+    <div class="tech-specs-card">
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Engine Architecture &amp; Training Details</h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem;">
+        Convolutional policy &amp; value network trained with self-play and Stockfish Multi-PV supervision.
+      </p>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="spec-label">Input Tensor Planes</div>
+          <div class="spec-val">12x8x8 (Piece Bitboards)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Network Architecture</div>
+          <div class="spec-val">ResNet + Squeeze-and-Excite</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Training Corpus</div>
+          <div class="spec-val">2,000,000+ Positions</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Pure Policy Strength</div>
+          <div class="spec-val">~1500 Elo (0-Depth Search)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Move Space Representation</div>
+          <div class="spec-val">4,096 Legal Action Planes</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Inference Engine</div>
+          <div class="spec-val">PyTorch CUDA / WebAssembly</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Chess Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+  
+  <script src="demos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize standalone Chess demo
+      if (window.ChessCNNDemo) {
+        new ChessCNNDemo();
+      }
+    });
+  </script>
+</body>
+</html>

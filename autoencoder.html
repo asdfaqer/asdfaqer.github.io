@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discrete Autoencoder &mdash; Reasoning Trace Visualizer | Fengtao Wang</title>
+  <meta name="description" content="Interactive visualizer for the Math Reasoning Discrete Autoencoder. 16K Codebook size, token gating heatmap, and lossless arithmetic compression (+37% vs gzip).">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .standalone-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .standalone-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 7, 20, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .standalone-header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    .back-link:hover {
+      color: var(--color-aqua);
+      transform: translateX(-3px);
+    }
+    .backend-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(69, 169, 169, 0.12);
+      border: 1px solid rgba(152, 232, 222, 0.3);
+      color: var(--color-aqua);
+    }
+    .backend-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .standalone-main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      width: 100%;
+    }
+    .page-title-banner {
+      margin-bottom: 2.5rem;
+    }
+    .page-title-banner h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+    .page-title-banner p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      line-height: 1.6;
+    }
+    .tech-specs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .spec-item {
+      background: rgba(19, 14, 34, 0.6);
+      border: 1px solid rgba(62, 62, 117, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+    }
+    .spec-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .spec-val {
+      font-size: 1.1rem;
+      color: #ffffff;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body class="standalone-page">
+
+  <!-- Header -->
+  <header class="standalone-header">
+    <div class="standalone-header-content">
+      <a href="index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="backend-badge" id="backendStatusBadge">
+          <span class="backend-pulse-dot" id="backendPulse"></span>
+          <span id="backendStatusText">Checking Model Backend...</span>
+        </div>
+
+        <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub Repo</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Demo Content -->
+  <main class="standalone-main">
+    <div class="page-title-banner">
+      <span class="section-tag">Deep Learning &bull; Discrete Bottlenecks</span>
+      <h1>Discrete Autoencoder &mdash; Reasoning Trace Visualizer</h1>
+      <p>
+        Compresses chain-of-thought mathematical reasoning steps into compact discrete 16K codebook representations. Enables lossless arithmetic compression that beats standard Gzip by <strong>+37.1%</strong> across all latent prefix budgets.
+      </p>
+    </div>
+
+    <!-- Demo Box -->
+    <div class="demo-box" id="autoencoder-demo" style="margin-bottom: 0;">
+      <!-- Controls Grid -->
+      <div class="ae-controls-grid">
+        <div class="ae-control-item">
+          <label for="ae-sample-select">Reasoning Trace Prompt</label>
+          <select id="ae-sample-select" class="ae-select">
+            <option value="0" selected>Quadratic Factoring Reasoning</option>
+            <option value="1">Cauchy Convergence Criterion</option>
+            <option value="2">Modular Arithmetic Proof</option>
+            <option value="3">Discrete Codebook Compression</option>
+            <option value="custom">Custom Reasoning Prompt...</option>
+          </select>
+        </div>
+
+        <div class="ae-control-item">
+          <label for="ae-acc-slider">
+            <span>Target Accuracy (Linked to Probe)</span>
+            <span id="ae-acc-val" style="color: var(--color-aqua);">95%</span>
+          </label>
+          <input type="range" id="ae-acc-slider" class="ae-slider" min="50" max="99" value="95">
+        </div>
+
+        <div class="ae-control-item">
+          <label for="ae-drop-slider">
+            <span>Drop K Latents (Keep M = <strong id="ae-keep-m">64</strong>)</span>
+            <span id="ae-drop-val" style="color: var(--color-aqua);">0</span>
+          </label>
+          <input type="range" id="ae-drop-slider" class="ae-slider" min="0" max="56" value="0">
+        </div>
+      </div>
+
+      <!-- Custom Input Box -->
+      <textarea id="ae-custom-text" class="ae-input-text" rows="3" style="display: none; margin-bottom: 1.5rem;" placeholder="Type custom mathematical reasoning text to tokenize and compress with the real model..."></textarea>
+
+      <!-- Token Gating Ribbon -->
+      <div class="ae-panel-label">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        Input Reasoning Tokens &amp; Gating Heatmap (Green = Latent Bottleneck, Gray = Dropped Tail)
+      </div>
+      <div class="ae-token-ribbon" id="ae-token-display"></div>
+
+      <!-- Codebook Latent Indices -->
+      <div class="ae-panel-label">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Quantized Discrete Codebook Indices (Codebook Size = 16,384 / 16K)
+      </div>
+      <div class="ae-codebook-chips" id="ae-codebook-display"></div>
+
+      <!-- Reconstructed Tokens -->
+      <div class="ae-panel-label">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Autoregressive Transformer Decoder Reconstruction
+      </div>
+      <div class="ae-token-ribbon" id="ae-reconstruct-display" style="min-height: 60px;"></div>
+
+      <!-- Lossless Storage Metrics Grid -->
+      <div class="ae-metrics-grid">
+        <div class="ae-metric-card">
+          <div class="ae-metric-label">Raw Storage</div>
+          <div class="ae-metric-val" id="ae-stat-orig-bits">0 b</div>
+        </div>
+        <div class="ae-metric-card">
+          <div class="ae-metric-label">Standard Gzip</div>
+          <div class="ae-metric-val" id="ae-stat-gzip-bits">0 b</div>
+        </div>
+        <div class="ae-metric-card">
+          <div class="ae-metric-label">Autoencoder + Arithmetic</div>
+          <div class="ae-metric-val" id="ae-stat-comp-bits">0 b</div>
+        </div>
+        <div class="ae-metric-card">
+          <div class="ae-metric-label">Compression vs Gzip</div>
+          <div class="ae-metric-val" id="ae-stat-ratio">+37.1%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Architecture Breakdown -->
+    <div class="tech-specs-card">
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Architecture &amp; Training Specifications</h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem;">
+        Hyperparameters from the 72-dimension Phase 2 Joint End-to-End trained model (<code style="color: var(--color-aqua);">joint_discrete_epoch_15.pt</code>).
+      </p>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="spec-label">Discrete Codebook Size</div>
+          <div class="spec-val">16,384 Codes (14 bits)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Model Dimension (d_model)</div>
+          <div class="spec-val">72 (4 Attention Heads)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Encoder / Decoder Layers</div>
+          <div class="spec-val">3 Layers / 3 Layers</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Codebook Utilization</div>
+          <div class="spec-val">99.2% (16,248 Active)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Lossless Bitstream</div>
+          <div class="spec-val">Neural + Arithmetic</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Peak Full Accuracy (M=64)</div>
+          <div class="spec-val">93.98% Token Match</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="demos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize standalone Autoencoder demo
+      if (window.AutoencoderDemo) {
+        new AutoencoderDemo();
+      }
+    });
+  </script>
+</body>
+</html>

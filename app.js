@@ -174,3 +174,99 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ===================================================================
+// 5. On-Demand Collapsible Demos Controller (Performance Protection)
+// ===================================================================
+let aeDemoInstance = null;
+let chessDemoInstance = null;
+
+window.toggleDemoPreview = function(demoType) {
+  if (demoType === 'ae') {
+    const container = document.getElementById('ae-preview-container');
+    const icon = document.getElementById('ae-toggle-icon');
+    const text = document.getElementById('ae-toggle-text');
+    if (!container) return;
+
+    const isCurrentlyExpanded = container.classList.contains('is-expanded');
+    if (isCurrentlyExpanded) {
+      container.classList.remove('is-expanded');
+      if (icon) icon.textContent = '+';
+      if (text) text.textContent = 'Expand In-Page Preview';
+    } else {
+      container.classList.add('is-expanded');
+      if (icon) icon.textContent = '−';
+      if (text) text.textContent = 'Hide In-Page Preview';
+
+      // Initialize on demand
+      if (!aeDemoInstance && window.AutoencoderDemo) {
+        aeDemoInstance = new window.AutoencoderDemo(container);
+      }
+    }
+  } else if (demoType === 'chess') {
+    const container = document.getElementById('chess-preview-container');
+    const icon = document.getElementById('chess-toggle-icon');
+    const text = document.getElementById('chess-toggle-text');
+    if (!container) return;
+
+    const isCurrentlyExpanded = container.classList.contains('is-expanded');
+    if (isCurrentlyExpanded) {
+      container.classList.remove('is-expanded');
+      if (icon) icon.textContent = '+';
+      if (text) text.textContent = 'Expand In-Page Preview';
+    } else {
+      container.classList.add('is-expanded');
+      if (icon) icon.textContent = '−';
+      if (text) text.textContent = 'Hide In-Page Preview';
+
+      // Load chess scripts dynamically if needed and initialize
+      loadChessScriptsThenInit(container);
+    }
+  }
+};
+
+function loadChessScriptsThenInit(container) {
+  if (chessDemoInstance) return;
+
+  function initDemo() {
+    if (window.ChessCNNDemo && !chessDemoInstance) {
+      chessDemoInstance = new window.ChessCNNDemo(container);
+    }
+  }
+
+  if (typeof Chess !== 'undefined' && typeof Chessboard !== 'undefined') {
+    initDemo();
+    return;
+  }
+
+  // Dynamically load Chess & Chessboard scripts without blocking page load
+  const loadScript = (src) => {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.body.appendChild(s);
+    });
+  };
+
+  const loadCss = (href) => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  };
+
+  loadCss('https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css');
+
+  loadScript('https://code.jquery.com/jquery-3.5.1.min.js')
+    .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js'))
+    .then(() => loadScript('https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js'))
+    .then(() => {
+      initDemo();
+    })
+    .catch(err => {
+      console.warn('Could not dynamically load chess scripts:', err);
+    });
+}
+

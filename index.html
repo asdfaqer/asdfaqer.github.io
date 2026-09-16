@@ -169,6 +169,9 @@
                   <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                     GitHub Repo
                   </a>
+                  <a href="autoencoder.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    Live Demo &rarr;
+                  </a>
                 </div>
               </div>
             </div>
@@ -236,6 +239,9 @@
                 <div class="project-card-actions">
                   <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                     GitHub Repo
+                  </a>
+                  <a href="chess.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                    Live Demo &rarr;
                   </a>
                 </div>
               </div>
@@ -392,157 +398,195 @@
         <span class="section-tag">Interactive Research &amp; Deep Learning</span>
         <h2 class="section-title">Live Technical <span>Demos</span></h2>
         <p class="section-subtitle">
-          Real-time interactive demonstrations of the Discrete Autoencoder reasoning trace compressor and the Chess CNN policy engine.
+          Dedicated standalone interactive pages and on-demand browser previews of the Discrete Autoencoder reasoning trace compressor and Chess CNN policy engine.
         </p>
       </div>
 
-      <!-- DEMO 1: Discrete Autoencoder for Math Reasoning (visualize.py) -->
-      <div class="demo-box" id="autoencoder-demo">
+      <!-- DEMO 1: Discrete Autoencoder for Math Reasoning -->
+      <div class="demo-box" id="autoencoder-demo-card">
         <div class="demo-header-bar">
           <div class="demo-title-group">
             <h3>Discrete Autoencoder &mdash; Reasoning Trace Visualizer</h3>
-            <p>Maps mathematical reasoning steps into discrete codebooks for lossless arithmetic compression (+37% higher compression than gzip).</p>
+            <p>Maps mathematical reasoning steps into discrete codebooks for lossless arithmetic compression (+37.1% higher compression than gzip).</p>
+            <div class="demo-badges-row">
+              <span class="demo-badge-pill">16,384 Codebook Size</span>
+              <span class="demo-badge-pill">+37.1% vs Gzip (Lossless)</span>
+              <span class="demo-badge-pill">Cascading Memory Transformer</span>
+              <span class="demo-badge-pill">Probe-Linked Latents</span>
+            </div>
           </div>
-          <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem;">
-            <span>GitHub Repository</span>
-          </a>
-        </div>
-
-        <!-- Controls Grid -->
-        <div class="ae-controls-grid">
-          <div class="ae-control-item">
-            <label for="ae-sample-select">Reasoning Trace Prompt</label>
-            <select id="ae-sample-select" class="ae-select">
-              <option value="0" selected>Quadratic Factoring Reasoning</option>
-              <option value="1">Cauchy Convergence Criterion</option>
-              <option value="2">Modular Arithmetic Proof</option>
-              <option value="3">Discrete Codebook Compression</option>
-              <option value="custom">Custom Reasoning Prompt...</option>
-            </select>
-          </div>
-
-          <div class="ae-control-item">
-            <label for="ae-acc-slider">
-              <span>Target Accuracy</span>
-              <span id="ae-acc-val" style="color: var(--color-aqua);">95%</span>
-            </label>
-            <input type="range" id="ae-acc-slider" class="ae-slider" min="70" max="100" value="95">
-          </div>
-
-          <div class="ae-control-item">
-            <label for="ae-drop-slider">
-              <span>Drop K Latents</span>
-              <span id="ae-drop-val" style="color: var(--color-aqua);">10</span>
-            </label>
-            <input type="range" id="ae-drop-slider" class="ae-slider" min="0" max="32" value="10">
+          
+          <div class="demo-actions-row">
+            <a href="autoencoder.html" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
+              <span>Launch Full Page Demo &rarr;</span>
+            </a>
+            <button class="demo-toggle-btn" id="toggle-ae-btn" onclick="toggleDemoPreview('ae')">
+              <span class="demo-toggle-icon" id="ae-toggle-icon">+</span>
+              <span id="ae-toggle-text">Expand In-Page Preview</span>
+            </button>
+            <a href="https://github.com/asdfaqer/Math-Reasoning-Discrete-Autoencoder" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <span>GitHub Repo</span>
+            </a>
           </div>
         </div>
 
-        <!-- Custom Input Box (Initially Hidden) -->
-        <textarea id="ae-custom-text" class="ae-input-text" rows="3" style="display: none; margin-bottom: 1.5rem;" placeholder="Type custom mathematical reasoning text to tokenize and compress..."></textarea>
+        <!-- Collapsible In-Page Preview (Only initialized when expanded) -->
+        <div class="demo-preview-wrapper" id="ae-preview-container">
+          <!-- Controls Grid -->
+          <div class="ae-controls-grid">
+            <div class="ae-control-item">
+              <label for="ae-sample-select">Reasoning Trace Prompt</label>
+              <select id="ae-sample-select" class="ae-select">
+                <option value="0" selected>Quadratic Factoring Reasoning</option>
+                <option value="1">Cauchy Convergence Criterion</option>
+                <option value="2">Modular Arithmetic Proof</option>
+                <option value="3">Discrete Codebook Compression</option>
+                <option value="custom">Custom Reasoning Prompt...</option>
+              </select>
+            </div>
 
-        <!-- Token Gating Ribbon (visualize.py gate scores) -->
-        <div class="ae-panel-label">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-          Input Reasoning Tokens &amp; Gating Heatmap (Green = Latent Bottleneck, Gray = Dropped)
-        </div>
-        <div class="ae-token-ribbon" id="ae-token-display"></div>
+            <div class="ae-control-item">
+              <label for="ae-acc-slider">
+                <span>Target Accuracy (Probe Linked)</span>
+                <span id="ae-acc-val" style="color: var(--color-aqua);">95%</span>
+              </label>
+              <input type="range" id="ae-acc-slider" class="ae-slider" min="50" max="99" value="95">
+            </div>
 
-        <!-- Codebook Latent Indices -->
-        <div class="ae-panel-label">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-          Quantized Discrete Codebook Indices (Codebook Size = 16,384 / 16K)
-        </div>
-        <div class="ae-codebook-chips" id="ae-codebook-display"></div>
-
-        <!-- Reconstructed Tokens -->
-        <div class="ae-panel-label">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Autoregressive Transformer Decoder Reconstruction
-        </div>
-        <div class="ae-token-ribbon" id="ae-reconstruct-display" style="min-height: 60px;"></div>
-
-        <!-- Lossless Storage Metrics Grid -->
-        <div class="ae-metrics-grid">
-          <div class="ae-metric-card">
-            <div class="ae-metric-label">Raw Storage</div>
-            <div class="ae-metric-val" id="ae-stat-orig-bits">0 b</div>
+            <div class="ae-control-item">
+              <label for="ae-drop-slider">
+                <span>Drop K Latents (Keep M = <strong id="ae-keep-m">64</strong>)</span>
+                <span id="ae-drop-val" style="color: var(--color-aqua);">0</span>
+              </label>
+              <input type="range" id="ae-drop-slider" class="ae-slider" min="0" max="56" value="0">
+            </div>
           </div>
-          <div class="ae-metric-card">
-            <div class="ae-metric-label">Standard Gzip</div>
-            <div class="ae-metric-val" id="ae-stat-gzip-bits">0 b</div>
+
+          <!-- Custom Input Box -->
+          <textarea id="ae-custom-text" class="ae-input-text" rows="3" style="display: none; margin-bottom: 1.5rem;" placeholder="Type custom reasoning text to tokenize and compress..."></textarea>
+
+          <!-- Token Gating Ribbon -->
+          <div class="ae-panel-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Input Reasoning Tokens &amp; Gating Heatmap (Green = Latent Bottleneck, Gray = Dropped Tail)
           </div>
-          <div class="ae-metric-card">
-            <div class="ae-metric-label">Autoencoder + Arithmetic</div>
-            <div class="ae-metric-val" id="ae-stat-comp-bits">0 b</div>
+          <div class="ae-token-ribbon" id="ae-token-display"></div>
+
+          <!-- Codebook Latent Indices -->
+          <div class="ae-panel-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Quantized Discrete Codebook Indices (Codebook Size = 16,384 / 16K)
           </div>
-          <div class="ae-metric-card">
-            <div class="ae-metric-label">Compression Gain</div>
-            <div class="ae-metric-val" id="ae-stat-ratio" style="font-size: 1.1rem; color: var(--color-aqua);">37% &gt; gzip</div>
+          <div class="ae-codebook-chips" id="ae-codebook-display"></div>
+
+          <!-- Reconstructed Tokens -->
+          <div class="ae-panel-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Autoregressive Transformer Decoder Reconstruction
+          </div>
+          <div class="ae-token-ribbon" id="ae-reconstruct-display" style="min-height: 60px;"></div>
+
+          <!-- Lossless Storage Metrics Grid -->
+          <div class="ae-metrics-grid">
+            <div class="ae-metric-card">
+              <div class="ae-metric-label">Raw Storage</div>
+              <div class="ae-metric-val" id="ae-stat-orig-bits">0 b</div>
+            </div>
+            <div class="ae-metric-card">
+              <div class="ae-metric-label">Standard Gzip</div>
+              <div class="ae-metric-val" id="ae-stat-gzip-bits">0 b</div>
+            </div>
+            <div class="ae-metric-card">
+              <div class="ae-metric-label">Autoencoder + Arithmetic</div>
+              <div class="ae-metric-val" id="ae-stat-comp-bits">0 b</div>
+            </div>
+            <div class="ae-metric-card">
+              <div class="ae-metric-label">Compression vs Gzip</div>
+              <div class="ae-metric-val" id="ae-stat-ratio">+37.1%</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- DEMO 2: Chess CNN Deep Learning Suite (web testing/) -->
-      <div class="demo-box" id="chess-demo">
+      <!-- DEMO 2: Chess CNN Deep Learning Suite -->
+      <div class="demo-box" id="chess-demo-card">
         <div class="demo-header-bar">
           <div class="demo-title-group">
             <h3>Chess CNN &mdash; Deep Learning Web Suite</h3>
             <p>Residual / Squeeze-and-Excitation network trained on 2M+ positions (~1500 Elo without search). Play as White against the CNN engine.</p>
+            <div class="demo-badges-row">
+              <span class="demo-badge-pill">ResNet + Squeeze-and-Excite</span>
+              <span class="demo-badge-pill">2,000,000+ Positions</span>
+              <span class="demo-badge-pill">Candidate Policy Heatmap</span>
+              <span class="demo-badge-pill">~1500 Elo (0-Depth)</span>
+            </div>
           </div>
-          <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem;">
-            <span>GitHub Repository</span>
-          </a>
+
+          <div class="demo-actions-row">
+            <a href="chess.html" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
+              <span>Launch Full Page Demo &rarr;</span>
+            </a>
+            <button class="demo-toggle-btn" id="toggle-chess-btn" onclick="toggleDemoPreview('chess')">
+              <span class="demo-toggle-icon" id="chess-toggle-icon">+</span>
+              <span id="chess-toggle-text">Expand In-Page Preview</span>
+            </button>
+            <a href="https://github.com/asdfaqer/CNN-Chess-Project" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <span>GitHub Repo</span>
+            </a>
+          </div>
         </div>
 
-        <div class="chess-demo-layout">
-          <!-- Chessboard -->
-          <div>
-            <div id="chessBoardContainer"></div>
-          </div>
-
-          <!-- Controls & CNN Move Probability Distribution -->
-          <div class="chess-sidebar">
-            <div class="chess-controls-box">
-              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
-                <div style="flex: 1; min-width: 140px;">
-                  <label for="chessAiMode" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
-                    AI Engine Mode
-                  </label>
-                  <select id="chessAiMode" class="ae-select">
-                    <option value="fast" selected>Fast AI (Policy Net)</option>
-                    <option value="mcts">Strong AI (MCTS Search)</option>
-                  </select>
-                </div>
-
-                <div style="flex: 1; min-width: 120px;">
-                  <label for="chessTimeLimit" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
-                    Think Time
-                  </label>
-                  <select id="chessTimeLimit" class="ae-select">
-                    <option value="1" selected>1 second</option>
-                    <option value="3">3 seconds</option>
-                    <option value="5">5 seconds</option>
-                  </select>
-                </div>
-              </div>
-
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
-                <div style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary);">
-                  Status: <span id="chessStatus" style="color: var(--color-aqua);">White to move</span>
-                </div>
-                <button class="btn btn-secondary" id="chessResetBtn" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
-                  Reset Board
-                </button>
-              </div>
+        <!-- Collapsible In-Page Preview (Only initialized when expanded) -->
+        <div class="demo-preview-wrapper" id="chess-preview-container">
+          <div class="chess-demo-layout">
+            <!-- Chessboard -->
+            <div>
+              <div id="chessBoardContainer"></div>
             </div>
 
-            <!-- CNN Policy Distribution -->
-            <div class="chess-controls-box">
-              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.6rem;">
-                CNN Policy Candidate Move Probabilities
+            <!-- Controls & CNN Move Probability Distribution -->
+            <div class="chess-sidebar">
+              <div class="chess-controls-box">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+                  <div style="flex: 1; min-width: 140px;">
+                    <label for="chessAiMode" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                      AI Engine Mode
+                    </label>
+                    <select id="chessAiMode" class="ae-select">
+                      <option value="fast" selected>Fast AI (Policy Net)</option>
+                      <option value="mcts">Strong AI (MCTS Search)</option>
+                    </select>
+                  </div>
+
+                  <div style="flex: 1; min-width: 120px;">
+                    <label for="chessTimeLimit" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-aqua); margin-bottom: 0.4rem; text-transform: uppercase;">
+                      Think Time
+                    </label>
+                    <select id="chessTimeLimit" class="ae-select">
+                      <option value="1" selected>1 second</option>
+                      <option value="3">3 seconds</option>
+                      <option value="5">5 seconds</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                  <div style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary);">
+                    Status: <span id="chessStatus" style="color: var(--color-aqua);">White to move</span>
+                  </div>
+                  <button class="btn btn-secondary" id="chessResetBtn" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                    Reset Board
+                  </button>
+                </div>
               </div>
-              <div class="chess-policy-list" id="chessPolicyList"></div>
+
+              <!-- CNN Policy Distribution -->
+              <div class="chess-controls-box">
+                <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.6rem;">
+                  CNN Policy Candidate Move Probabilities
+                </div>
+                <div class="chess-policy-list" id="chessPolicyList"></div>
+              </div>
             </div>
           </div>
         </div>

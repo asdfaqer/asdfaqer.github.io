@@ -825,6 +825,71 @@ body {
   color: var(--text-secondary);
 }
 
+.demo-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.demo-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(62, 62, 117, 0.4);
+  border: 1px solid rgba(152, 232, 222, 0.25);
+  color: var(--color-aqua);
+  padding: 0.5rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.demo-toggle-btn:hover {
+  background: rgba(69, 169, 169, 0.25);
+  border-color: var(--color-aqua);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.demo-toggle-icon {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.demo-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.demo-badge-pill {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  background: rgba(19, 14, 34, 0.7);
+  border: 1px solid rgba(152, 232, 222, 0.2);
+  color: var(--color-aqua);
+  font-family: var(--font-mono);
+}
+
+.demo-preview-wrapper {
+  display: none;
+  margin-top: 1.8rem;
+  padding-top: 1.8rem;
+  border-top: 1px dashed rgba(152, 232, 222, 0.2);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.demo-preview-wrapper.is-expanded {
+  display: block;
+}
+
 /* Autoencoder Controls & Panels */
 .ae-controls-grid {
   display: grid;
