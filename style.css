@@ -353,11 +353,11 @@ body {
 
 /* BIG NAME IN MIDDLE */
 .hero-name {
-  font-size: clamp(3.5rem, 8vw, 6.8rem);
+  font-size: clamp(3.8rem, 8.5vw, 7.2rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -2px;
-  margin-bottom: 1.4rem;
+  margin-bottom: 2.8rem;
   background: linear-gradient(135deg, #ffffff 15%, var(--color-aqua) 60%, var(--color-teal) 95%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
