@@ -131,13 +131,13 @@ class AutoencoderDemo {
       this.tokenDisplay.appendChild(span);
     });
 
-    // Render Codebook Indices
+    // Render Codebook Indices (16K Codebook Size = 16384)
     this.codebookDisplay.innerHTML = '';
     const codebookCount = Math.min(16, keptCount);
     for (let c = 0; c < codebookCount; c++) {
       const chip = document.createElement('span');
       chip.className = 'ae-code-chip';
-      const codeId = (this.pseudoHash(tokens[c % tokens.length], c * 41 + 17) % 4096);
+      const codeId = (this.pseudoHash(tokens[c % tokens.length], c * 41 + 17) % 16384);
       chip.textContent = `#${codeId}`;
       this.codebookDisplay.appendChild(chip);
     }
